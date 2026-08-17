@@ -7,6 +7,7 @@ import BusinessesPage from "@/pages/businesses"
 import BusinessDetailPage from "@/pages/business-detail"
 import RegionDetailPage from "@/pages/region-detail"
 import MethodologyPage from "@/pages/methodology"
+import AnalyticsPage from "@/pages/analytics"
 import NotFoundPage from "@/pages/not-found"
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/regions/:id" element={<RegionDetailPage />} />
         <Route path="/businesses" element={<BusinessesPage />} />
         <Route path="/businesses/:id" element={<BusinessDetailPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/methodology" element={<MethodologyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

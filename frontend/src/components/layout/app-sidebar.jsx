@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { Building2, LayoutDashboard, Radar, BrainCircuit } from "lucide-react"
+import { Building2, LayoutDashboard, Radar, BrainCircuit, BarChart3 } from "lucide-react"
 
 import {
   Sidebar,
@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { to: "/", label: "Landing Overview", icon: Radar, exact: true },
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/businesses", label: "Businesses", icon: Building2, exact: false },
+  { to: "/analytics", label: "Analytics & Graphs", icon: BarChart3, exact: true },
   { to: "/methodology", label: "AI & Methodology", icon: BrainCircuit, exact: true },
 ]
 

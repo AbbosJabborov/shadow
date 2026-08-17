@@ -12,7 +12,6 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/layout/app-sidebar"
-import { Interactive3DBackground } from "@/components/interactive-3d-background"
 import { getBusiness } from "@/lib/businesses"
 import { getRegion } from "@/lib/regions"
 
@@ -39,6 +38,14 @@ function useBreadcrumbs() {
     return [{ label: "Dashboard", to: "/dashboard" }, { label: "Businesses" }]
   }
 
+  if (segments[0] === "methodology") {
+    return [{ label: "Dashboard", to: "/dashboard" }, { label: "AI & Methodology" }]
+  }
+
+  if (segments[0] === "analytics" || segments[0] === "graph") {
+    return [{ label: "Dashboard", to: "/dashboard" }, { label: "Analytics & Graph" }]
+  }
+
   return [{ label: "Dashboard" }]
 }
 
@@ -49,7 +56,6 @@ export function AppLayout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="relative">
-        <Interactive3DBackground variant="subtle" showControls={false} />
         <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur-md">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />

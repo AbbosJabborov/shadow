@@ -215,33 +215,52 @@ export default function BusinessDetailPage() {
 
               {status === "done" && result && (
                 <div className="flex flex-col gap-5">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="flex flex-col gap-2 rounded-lg border p-3">
-                      <span className="text-xs text-muted-foreground">
-                        Shadow Economy Score
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="flex flex-col gap-2 rounded-lg border p-3 bg-card">
+                      <span className="text-xs text-muted-foreground font-medium">
+                        Shadow Score
                       </span>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-3xl font-semibold tabular-nums">
+                        <span className="text-2xl font-bold font-mono">
                           {result.score}
                         </span>
-                        <span className="text-sm text-muted-foreground">/ 10</span>
-                        <Badge variant={scoreTier.variant} className="ml-auto">
+                        <span className="text-xs text-muted-foreground">/ 10</span>
+                        <Badge variant={scoreTier.variant} className="ml-auto text-xs">
                           {scoreTier.label}
                         </Badge>
                       </div>
                       <Progress value={result.score * 10} />
                     </div>
-                    <div className="flex flex-col gap-2 rounded-lg border p-3">
-                      <span className="text-xs text-muted-foreground">
-                        Estimated Probability
+
+                    <div className="flex flex-col gap-2 rounded-lg border p-3 bg-card">
+                      <span className="text-xs text-muted-foreground font-medium">
+                        Probability (P)
                       </span>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-3xl font-semibold tabular-nums">
+                        <span className="text-2xl font-bold font-mono">
                           {result.probability}%
                         </span>
-                        <span className="text-sm text-muted-foreground">confidence</span>
+                        <span className="text-xs text-muted-foreground">likelihood</span>
                       </div>
                       <Progress value={result.probability} />
+                    </div>
+
+                    <div className="flex flex-col gap-2 rounded-lg border p-3 bg-card border-primary/20 bg-primary/5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-primary">
+                          Evidence Confidence
+                        </span>
+                        <span className="text-[10px] text-muted-foreground font-mono">
+                          Coverage: {result.coveragePercent}%
+                        </span>
+                      </div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-2xl font-bold font-mono text-primary">
+                          {result.confidence}%
+                        </span>
+                        <span className="text-xs text-muted-foreground">decisiveness</span>
+                      </div>
+                      <Progress value={result.confidence} />
                     </div>
                   </div>
 
@@ -249,26 +268,61 @@ export default function BusinessDetailPage() {
                     {result.flagged ? <TriangleAlert /> : <CircleCheck />}
                     <AlertTitle>
                       {result.flagged
-                        ? "Flagged for review"
-                        : "No significant indicators found"}
+                        ? `Flagged: ${result.flaggedCount} Contradiction Signal${result.flaggedCount > 1 ? "s" : ""} Detected`
+                        : "Compliant: All Applicable Forensic Checks Clean"}
                     </AlertTitle>
                     <AlertDescription>
                       {result.flagged
-                        ? "This business meets enough risk indicators to warrant manual review."
-                        : "The current indicator set does not suggest elevated shadow economy risk."}
+                        ? "Arithmetic contradictions between declared tax filings and independent third-party records suggest elevated shadow economy exposure."
+                        : "Cross-document reconciliation indicates operations align consistently with declared tax and labor filings."}
                     </AlertDescription>
                   </Alert>
 
-                  {result.reasons.length > 0 && (
+                  {/* 7 Forensic Contradiction Signals Table / Grid */}
+                  {result.signals && (
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-sm font-medium">Contributing factors</h3>
-                      {result.reasons.map((reason) => (
-                        <Alert key={reason.id}>
-                          <Flag />
-                          <AlertTitle>{reason.title}</AlertTitle>
-                          <AlertDescription>{reason.description}</AlertDescription>
-                        </Alert>
-                      ))}
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          7 Forensic Contradiction Signals (Layer A)
+                        </h3>
+                        <span className="text-xs text-muted-foreground">
+                          {result.flaggedCount} of {result.applicableCount} flagged
+                        </span>
+                      </div>
+                      <div className="grid gap-2 sm:grid-cols-1">
+                        {result.signals.map((sig) => (
+                          <div
+                            key={sig.id}
+                            className={`flex flex-col sm:flex-row sm:items-center justify-between p-2.5 rounded-md border text-xs gap-1 sm:gap-4 transition-colors ${
+                              !sig.applicable
+                                ? "opacity-50 bg-muted/20 border-dashed"
+                                : sig.flagged
+                                ? "border-destructive/40 bg-destructive/5"
+                                : "bg-card border-border/80"
+                            }`}
+                          >
+                            <div className="flex flex-col gap-0.5">
+                              <div className="flex items-center gap-2">
+                                <span className="font-semibold">{sig.name}</span>
+                                <span className="text-[10px] text-muted-foreground">[{sig.category}]</span>
+                              </div>
+                              <span className="text-[11px] text-muted-foreground">
+                                {sig.flagged ? sig.flagDescription : sig.cleanDescription}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                              <span className="font-mono font-bold text-xs">{sig.formatted}</span>
+                              <Badge
+                                variant={!sig.applicable ? "outline" : sig.flagged ? "destructive" : "secondary"}
+                                className="text-[10px] py-0 h-5"
+                              >
+                                {!sig.applicable ? "Exempt" : sig.flagged ? "Flagged" : "Clean"}
+                              </Badge>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
 
