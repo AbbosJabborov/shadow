@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html data-theme="dark" style="color-scheme: dark;"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- frame-runtime --><!-- base href="https://337d7e37-d8fd-46e4-a61f-0b91de904982.frame.claudeusercontent.com/_f/1786955687-8c6e/" --><script>window.__FRAME_PREAMBLE={"capabilities":{"artifact":"artifact.BWD0CGLd.js","assets":"assets.a_mJ8q_Q.js","comments":"comments.DGBrvfFR.js","db":"db.VpIrzqr_.js","downloads":"downloads.BXsoAvg9.js","mcp":"mcp.D3B2EyQu.js","permissions":"permissions.BNySkLV5.js","room":"room.BgXZkiYR.js","sample":"sample.kXGC3wc0.js","self":"artifact.BWD0CGLd.js","user":"user.CGub7vEP.js"},"transforms":"_transforms.BI3gXbbT.js","comments":"_comments.hMHmCz0l.js","translate":"_translate.3AdCy0Ua.js"}</script><script>(function(){"use strict";var ce=["light","dark","system"],ue=/^[A-Za-z0-9_-]{1,64}$/,V=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,fe=new Set(["class","hidden","value","checked"]);function de(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||fe.has(t)}var pe="http://www.w3.org/1999/xhtml",me="http://www.w3.org/2000/svg",ge=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),_e=new Set(["script","style"]);function ve(e){const t=e.localName.toLowerCase();return e.namespaceURI===pe?!ge.has(t):e.namespaceURI===me?!_e.has(t):!1}function he(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_patch;if(t===null||typeof t!="object")return!1;const{seq:n,elements:a}=t;if(typeof n!="number"||!Number.isSafeInteger(n)||!Array.isArray(a)||a.length===0||a.length>64)return!1;for(const i of a){if(i===null||typeof i!="object")return!1;const r=i;if(typeof r.target!="string"||!ue.test(r.target)||r.text!==void 0&&typeof r.text!="string")return!1;if(r.attrsSet!==void 0){if(r.attrsSet===null||typeof r.attrsSet!="object")return!1;for(const[l,c]of Object.entries(r.attrsSet))if(!V.test(l)||typeof c!="string")return!1}if(r.attrsRemoved!==void 0){if(!Array.isArray(r.attrsRemoved))return!1;for(const l of r.attrsRemoved)if(typeof l!="string"||!V.test(l))return!1}}return!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function be(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function Ee(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const n=t.theme;return typeof n=="string"&&ce.includes(n)}function we(e){try{typeof reportError=="function"?reportError(e):setTimeout(()=>{throw e},0)}catch{}}var X=["#62744c","#b04e72","#5b7596","#a3651f","#7a6ba8","#3f7a75"],J=e=>{let t=0;for(let n=0;n<e.length;n++)t=t*31+e.charCodeAt(n)>>>0;return X[t%X.length]??"#788c5d"},Z="#c7c9d1",Ae=["data:image","/svg+xml,"].join(""),Q=e=>Ae+"%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2'%3E%3Ccircle cx='1' cy='1' r='1' fill='"+encodeURIComponent(e)+"'/%3E%3C/svg%3E",Se=Object.freeze({id:null,name:"",avatarUrl:Q(Z),color:Z,email:null,isOwner:!1,canEdit:!1}),je=(...e)=>{const t=e[0],n=typeof t=="string"?[t]:Array.isArray(t)?t.filter(i=>typeof i=="string"):[],a=Object.create(null);for(const i of n)a[i]={id:i,name:"",avatarUrl:Q(J(i)),color:J(i),email:null,isMe:!1};return a},ee=Object.freeze(Object.assign(Object.create(null),{user:Object.freeze(Object.assign(Object.create(null),{id:null,isOwner:!1,canEdit:!1,me:Se,profiles:je,name:"",avatarUrl:null,search:Object.freeze([]),email:null}))})),Re={sample:"sample"};function te(){const e=new Uint8Array(20);try{crypto.getRandomValues(e)}catch{for(let n=0;n<e.length;n++)e[n]=Math.floor(Math.random()*256)}let t="";for(const n of e)t+=(n%36).toString(36);return t}function Oe(e,t){const n=r=>{const l={path:r},c=r.split("/");return{id:c[c.length-1],path:r,get:()=>t("get",[l]),set:d=>t("set",[l,d]),update:d=>t("update",[l,d]),delete:()=>t("delete",[l]),acquire:d=>t("acquire",[l,d]),onSnapshot:(d,E)=>t("subscribe",[l,d,E]),collection:d=>i(r+"/"+String(d))}},a=r=>({where:(l,c,d)=>a({...r,where:[...r.where??[],{f:String(l),op:String(c),v:d}]}),orderBy:(l,c)=>a({...r,orderBy:{f:String(l),dir:c===void 0?"asc":String(c)}}),limit:l=>a({...r,limit:Number(l)}),get:()=>t("query",[r]),onSnapshot:(l,c)=>t("subscribe",[r,l,c])}),i=r=>({...a({collection:r}),path:r,doc:l=>n(r+"/"+(l===void 0?te():String(l))),add:l=>{const c=n(r+"/"+te());return Promise.resolve(c.set(l)).then(()=>c)}});e.doc=r=>n(String(r)),e.collection=r=>i(String(r))}var Pe=Object.freeze([]);function Te(e,t){let n=null,a=null;const i=()=>e.__settled;e.peers=()=>Pe,e.connected=()=>!1,e.emit=()=>i()?.()??Promise.resolve(),e.presence=r=>{const l=i();if(l)return l();let c=null;if(r!==null&&typeof r=="object")try{Array.isArray(r)||(c={...r})}catch{}return c===null?Promise.reject({code:"invalid_argument",message:"presence takes an object"}):(n===null&&(n=Object.create(null),a=Promise.resolve(t("presence",[n]))),Object.assign(n,c),a)}}var B="__frame_scroll",Me=150,Le=310,ke=160,Ce=3e4;function Ne(){let e=0,t=!1,n=!1,a=!1,i=0,r=null;const l=u=>{try{sessionStorage.setItem(B,JSON.stringify({y:u}))}catch{}},c=()=>{if(clearTimeout(e),r===null)return;const u=r;r=null,l(u)},d=()=>{if(t){t=!1;return}n=!0,r=scrollY,clearTimeout(e),e=setTimeout(c,Me)};try{addEventListener("scroll",d,{passive:!0}),addEventListener("pagehide",c)}catch{}const E=()=>{let u;try{u=sessionStorage.getItem(B)}catch{return null}if(u===null)return null;let g;try{g=JSON.parse(u)}catch{g=null}const f=g?.y;if(!(typeof f=="number"&&Number.isFinite(f)&&f>=0)){try{sessionStorage.removeItem(B)}catch{}return null}return f};let T=!1;const h=u=>{try{const g=scrollY;scrollTo({top:u,left:0,behavior:"instant"}),i=u,a=!0,clearTimeout(e),r=null,l(u);const f=scrollY;f!==g&&(t=!0),f!==u&&!T&&(T=!0,addEventListener("load",()=>{try{if(scrollY===f){const p=E();h(p!==null?p:i)}}catch{}},{once:!0}))}catch{}},R=()=>{try{return!!location.hash}catch{return!0}};let A=!1;const O=()=>{try{if(A||innerWidth>Le||innerHeight>ke)return;A=!0;const u=Date.now(),g=()=>{try{removeEventListener("resize",g)}catch{}if(Date.now()-u>Ce||n||R())return;const f=E();h(f!==null?f:i)};addEventListener("resize",g)}catch{}};let M=!1,o=!1;return{restore(){if(M||(M=!0,R()))return;const u=E();u!==null&&(h(u),O())},promoted(){if(o||(o=!0,R()))return;const u=E();u!==null?(h(u),O()):a&&h(i)}}}var Ye="modulepreload",We=function(e){return"/"+e},Ke={},Ue=function(t,n,a){let i=Promise.resolve();function r(l){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=l,window.dispatchEvent(c),!c.defaultPrevented)throw l}return i.then(l=>{for(const c of l||[])c.status==="rejected"&&r(c.reason);return t().catch(r)})};(function(){const e=Object.defineProperty,t=globalThis,n=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let a=0;for(let i=0;i<n.length;i++){const r=n[i];try{e(t,r,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[r]}catch{}try{e(t,r,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[r]=="function"&&a++}if(a&&window!==top)try{parent.postMessage({__frame_rtc_lockdown_failed:a},"*")}catch{}})();var qe=1e4,Ie=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function re(e){for(const t of Ie)if(t.endsWith(":*"))try{const n=new URL(e);if(`${n.protocol}//${n.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var k=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),x=window.__FRAME_PREAMBLE?.transforms,$=window.__FRAME_PREAMBLE?.comments,z=window.__FRAME_PREAMBLE?.translate,q=/^[\w.-]+\.js$/,De=/^[a-z][a-z0-9_-]{0,63}$/,I=e=>Ue(()=>import("/_runtime/"+e),void 0);function Be(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:Y,pipe:()=>({wrap:(n,a)=>(...i)=>{try{return a(...i)}catch(r){return Promise.reject(r)}}})}}var ne=null,C=null;function F(e,t,n){try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var H=!1;function xe(e,t){const n=[];for(const a of e.elements){const i=document.querySelector(`[data-id="${a.target}"]`);if(!i){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if([...Object.keys(a.attrsSet??{}),...a.attrsRemoved??[]].some(r=>!de(r))){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if(a.text!==void 0&&!ve(i)){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}for(const[r,l]of Object.entries(a.attrsSet??{}))if(!oe(i,r)){try{i.setAttribute(r,l)}catch{}se(i,r,l)}for(const r of a.attrsRemoved??[])oe(i,r)||(i.removeAttribute(r),se(i,r,null));typeof a.text=="string"&&(i.textContent=a.text),n.push(a.target)}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function se(e,t,n){if(!(e instanceof HTMLInputElement))return;const a=t.toLowerCase();a==="checked"?e.checked=n!==null:a==="value"&&e.type!=="file"&&(e.value=n??"")}function oe(e,t){const n=t.toLowerCase(),a=e;return n==="data-id"||(n==="value"||n==="checked")&&(a.__artifactSecret===!0||/^(password|hidden|file)$/.test(a.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${a.autocomplete??""}`))}function ae(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,H=!0):H&&(delete t.dataset.theme,t.style.colorScheme="",H=!1)}var ie=256,N=Object.assign(Object.create(null),{mcp:Object.assign(Object.create(null),{watchTool:{handlerArg:3}}),db:Object.assign(Object.create(null),{subscribe:{handlerArg:1,errArg:2}}),room:Object.assign(Object.create(null),{on:{handlerArg:1,errArg:2},onPeers:{handlerArg:0,errArg:1},onConnection:{handlerArg:0,errArg:1}})}),$e=Object.assign(Object.create(null),{db:(e,t)=>Oe(e,t),room:(e,t,n)=>Te(e,n)}),j=new Map;function Y(e,t){const n=j.get(e);if(!n)return;const a=Object.assign(Object.create(null),t);Object.assign(n.impl,a),n.r(n.ns),n.impl.__settled=()=>Promise.reject({code:"capability_removed",message:`${e}: method not in this runtime`});const i=n.queue;n.queue=[];for(const r of i){const l=a[r.method];if(l)if(N[e]?.[r.method])try{r.resolve(l(...r.args))}catch{U(r,N[e][r.method],{code:"transform_error",message:`${e}.${r.method} rejected its arguments`})}else l(...r.args).then(r.resolve,r.reject);else{const c={code:"capability_removed",message:`${e}.${r.method} is not in this runtime`},d=N[e]?.[r.method];if(d){U(r,d,c);continue}r.reject(c)}}}function ze(e,t){const n=j.get(e);if(!n)return;n.impl.__settled=()=>Promise.reject(t),n.r(null);const a=n.queue;n.queue=[];for(const i of a){const r=N[e]?.[i.method];if(r){U(i,r,t);continue}i.reject(t)}}function le(e,t){if(typeof e=="function")try{return e(...t)}catch{return Object.create(null)}return Array.isArray(e)?[...e]:e!==null&&typeof e=="object"?{...e}:e}function D(e,t){const n=ee[e];if(!n){ze(e,t);return}j.get(e)?.r(null),Y(e,Object.fromEntries(Object.entries(n).map(([a,i])=>[a,(...r)=>Promise.resolve(le(i,r))])))}function U(e,t,n){if(e.syncState?.dead)return;const a=t.errArg===void 0?void 0:e.args[t.errArg],i=t.errArg===void 0?e.args[t.handlerArg]:a;typeof i=="function"&&queueMicrotask(()=>{if(!e.syncState?.dead)try{i(t.errArg===void 0?{type:"error",error:n}:n)}catch(r){we(r)}})}var W=Object.getOwnPropertyDescriptor(window,"claude");if(window!==top&&!(W&&W.writable===!1)){const e=x&&q.test(x)?I(x).catch(()=>{}):Promise.resolve(void 0),t=o=>{if(o.type==="auxclick"&&o.button!==1)return;const u=o.target,g=u&&u.closest?u.closest("a[href],area[href]"):null;if(!g)return;const f=g.getAttribute("href");if(!f)return;let p,P;try{p=new URL(f,document.baseURI),P=new URL(document.baseURI).origin}catch{return}if((p.protocol==="http:"||p.protocol==="https:")&&p.origin!==P){o.preventDefault();const w=(g.getAttribute("target")??"").toLowerCase(),y=o.type==="auxclick"||o.metaKey||o.ctrlKey||o.shiftKey||o.altKey||!["","_self","_top","_parent"].includes(w);parent.postMessage({__frame_nav:!0,url:p.href,newTab:y},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const n={},a=o=>{o.isTrusted&&(n.pointer=!0)},i=o=>{o.isTrusted&&(n.click=!0)};addEventListener("pointermove",a,{capture:!0,passive:!0}),addEventListener("click",i,{capture:!0,passive:!0}),e.then(o=>{o?.wireNav&&(o.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",a,!0),removeEventListener("click",i,!0),o.wireEngagement?.(n))});let r=null;try{r=Ne()}catch{}const l=W?.value??{};F(window,"claude",l);const c=o=>{let u;const g=new Promise(v=>{u=v}),f={impl:Object.create(null),queue:[],u:g,r:u,ns:null};j.set(o,f);const p=f.impl,P=v=>({code:"queue_overflow",message:`${o}.${v}: pre-init call queue is full`}),w=(v,s)=>{if(f.queue.length>=ie){const m=ee[o];return m&&v in m?Promise.resolve(le(m[v],s)):Promise.reject(P(v))}return new Promise((m,_)=>{f.queue.push({method:v,args:s,resolve:m,reject:_})})},y=Re[o],L=new Proxy(y===void 0?p:(()=>{}),{apply:(v,s,m)=>{const _=y,b=p[_]??p.__settled;return b?b(...m):w(_,m)},get:(v,s)=>{if(typeof s!="string"||s==="then"||s==="toJSON"||s==="valueOf")return;if(s==="toString")return Object.prototype.toString;if(y!==void 0&&(s==="call"||s==="apply"||s==="bind"))return Function.prototype[s];const m=N[o]?.[s];return m?(..._)=>{if(typeof _[m.handlerArg]!="function")throw new TypeError(`${o}.${s} requires a handler function`);const b=p[s];if(b)return b(..._);if(p.__settled){const S={dead:!1},Fe={args:[..._],syncState:S};return p.__settled().catch(He=>U(Fe,m,He)),()=>{S.dead=!0}}if(f.queue.length>=ie){const S={dead:!1};return U({args:[..._],syncState:S},m,P(s)),()=>{S.dead=!0}}let K=null;const G={dead:!1};return f.queue.push({method:s,args:_,resolve:S=>{K=typeof S=="function"?S:null,G.dead&&K?.()},reject:()=>{},syncState:G}),()=>{G.dead=!0,K?.()}}:(..._)=>{const b=p[s]??p.__settled;return b?b(..._):w(s,_)}},set:()=>!1});$e[o]?.(p,(v,s)=>L[v](...s),w),f.ns=L,F(l,o,L)};for(const o of Object.keys(k)){if(l[o]!==void 0){F(l,o,l[o]);continue}c(o)}if(l.use===void 0){const o=u=>{if(typeof u!="string"||!Object.hasOwn(k,u))return Promise.resolve(null);const g=j.get(u);return g?g.u:Promise.resolve(l[u]??null)};try{Object.defineProperty(l,"use",{value:o,writable:!0,configurable:!0,enumerable:!1})}catch{}}let d=null,E=null,T=0;const h=o=>{o.source!==parent||!re(o.origin)||ye(o.data)&&(d=o.data.__frame_init,C=o.origin,removeEventListener("message",h),clearTimeout(T),E?.())};addEventListener("message",h),parent.postMessage({__frame_connect:!0},"*");const R=new Promise(o=>{E=o,T=setTimeout(()=>{removeEventListener("message",h),o()},qe)}),A=document.readyState==="loading"?new Promise(o=>document.addEventListener("DOMContentLoaded",()=>o(),{once:!0})):Promise.resolve();A.then(()=>{try{r?.restore()}catch{}});const O={cb:null},M=o=>{if(!(o.source!==parent||!re(o.origin))&&be(o.data)){try{r?.promoted()}catch{}O.cb?.()}};addEventListener("message",M),R.then(async()=>{if(!d||!C){for(const s of j.keys())D(s,{code:"not_granted",message:"frame initialization did not arrive - capability unavailable"});return}ae(d.theme);const o=C;let u=!1,g=!1;addEventListener("message",s=>{if(s.source!==parent||s.origin!==o)return;Ee(s.data)&&ae(s.data.__frame_theme.theme),he(s.data)&&xe(s.data.__frame_patch,o);const m=s.data?.__fc_mode;m&&typeof m=="object"&&!u&&$&&q.test($)&&(u=!0,I($).then(b=>b.install?.(o,m.on===!0)).catch(()=>{}));const _=s.data?.__ft_cmd;_&&typeof _=="object"&&!g&&z&&q.test(z)&&(g=!0,I(z).then(b=>b.install?.(o,_)).catch(()=>{}))});const f=Object.keys(d.capabilities??{});for(const s of f)Object.hasOwn(k,s)||De.test(s)&&l[s]===void 0&&(c(s),D(s,{code:"capability_disabled",message:"capability not in this runtime generation"}));const p=f.filter(s=>Object.hasOwn(k,s)).map(s=>[s,k[s]]).filter(s=>typeof s[1]=="string"&&q.test(s[1])),P=await Promise.allSettled(p.map(([,s])=>I(s))),w=await e,y=C;w?.buildBoot||parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},y),ne=w?.buildBoot?w.buildBoot(d,w.TRANSFORMS??{},{shellOrigin:y,mount:Y},s=>parent.postMessage({__frame_cap_telemetry:s},y)):Be(d,y);const L=s=>parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:s}},y),v=ne;P.forEach((s,m)=>{const _=p[m][0];if(s.status!=="fulfilled"){L(_);return}try{s.value?.install?.(v)}catch{L(_)}});for(const[s,m]of j)if(m.impl.__settled===void 0){if(f.includes(s)){D(s,{code:"capability_disabled",message:"capability not available in this session"});continue}D(s,{code:"not_granted",message:"capability not available in this session"})}await A,parent.postMessage({__frame_ready:!0},C),e.then(s=>s?.installSizeReporter?.(y,O))})}})();</script><!-- /frame-runtime --><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body data-new-gr-c-s-check-loaded="8.937.0" data-gr-ext-installed="">
+<meta charset="UTF-8">
+<title>Weight-of-Evidence Shadow Scoring</title>
+<style>
+  :root {
+    --paper: #eef0ea;
+    --surface: #e4e7de;
+    --surface-2: #daded1;
+    --ink: #1b1f1c;
+    --ink-soft: #565c55;
+    --ink-faint: #83887f;
+    --rule: #c4c8bc;
+    --stamp: #a8382b;
+    --stamp-soft: #a8382b1a;
+    --seal: #2c4a66;
+    --seal-soft: #2c4a661a;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181a;
+      --surface: #1b2023;
+      --surface-2: #232a2d;
+      --ink: #e7e6dc;
+      --ink-soft: #a3a99c;
+      --ink-faint: #6f766b;
+      --rule: #333b3a;
+      --stamp: #e2685a;
+      --stamp-soft: #e2685a26;
+      --seal: #86aed0;
+      --seal-soft: #86aed026;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181a;
+    --surface: #1b2023;
+    --surface-2: #232a2d;
+    --ink: #e7e6dc;
+    --ink-soft: #a3a99c;
+    --ink-faint: #6f766b;
+    --rule: #333b3a;
+    --stamp: #e2685a;
+    --stamp-soft: #e2685a26;
+    --seal: #86aed0;
+    --seal-soft: #86aed026;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--stamp-soft); }
+
+  .masthead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .masthead .dot { color: var(--stamp); }
+
+  main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.4rem 1.5rem 6rem;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.9rem;
+  }
+
+  h1.title {
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    line-height: 1.18;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    text-wrap: balance;
+    margin: 0 0 1.6rem;
+    max-width: 40rem;
+  }
+
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    border: 1.5px solid var(--stamp);
+    color: var(--stamp);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35em 0.7em;
+    border-radius: 3px;
+    transform: rotate(-2deg);
+    margin: 0.2rem 0 2rem;
+  }
+  .stamp svg { width: 13px; height: 13px; }
+
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.85rem 0;
+    margin-bottom: 2.4rem;
+  }
+  .byline b { color: var(--ink); font-weight: 600; }
+
+  .abstract {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.8rem;
+  }
+  .abstract .label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin: 0 0 0.6rem;
+  }
+  .abstract p { margin: 0; font-size: 0.98rem; color: var(--ink-soft); }
+  .abstract p + p { margin-top: 0.8rem; }
+
+  section { margin-bottom: 3.1rem; }
+
+  h2.sec {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 1.1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--rule);
+    text-wrap: balance;
+  }
+  h2.sec .num {
+    font-family: var(--font-mono);
+    color: var(--stamp);
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  h3.sub {
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin: 1.8rem 0 0.7rem;
+  }
+
+  p { margin: 0 0 1rem; }
+  .lede { font-size: 1.03rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  a { color: var(--seal); }
+
+  code, .mono {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+  }
+  .code-inline {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.05em 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  .formula {
+    font-family: var(--font-mono);
+    font-size: 0.94rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--seal);
+    border-radius: 2px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0 1.3rem;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.7;
+  }
+  .formula .comment { color: var(--ink-faint); font-style: italic; }
+
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0 1.4rem; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.88rem;
+    min-width: 480px;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+    caption-side: top;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--ink-faint);
+  }
+  td.num, th.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  tr.flag td:first-child { color: var(--stamp); }
+  tr.hi td.num { color: var(--seal); font-weight: 600; }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.12em 0.5em;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+  }
+  .pill.on { color: var(--stamp); background: var(--stamp-soft); border-color: var(--stamp); }
+  .pill.off { color: var(--ink-faint); border-color: var(--rule); }
+
+  .callout {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.2rem 0;
+    position: relative;
+  }
+  .callout.limit { border-left: 3px solid var(--stamp); }
+  .callout.note { border-left: 3px solid var(--seal); }
+  .callout .label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+  .callout.limit .label { color: var(--stamp); }
+  .callout.note .label { color: var(--seal); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  figure { margin: 1.6rem 0; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.7rem;
+    max-width: 40rem;
+  }
+  .diagram-frame {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1rem 0.5rem;
+    background: var(--surface);
+  }
+
+  .worked {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.9rem;
+    margin: 1.2rem 0 1.6rem;
+  }
+  @media (max-width: 640px) { .worked { grid-template-columns: 1fr; } }
+  .worked .card {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0.9rem 1rem;
+  }
+  .worked .card h4 {
+    margin: 0 0 0.15rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+  .worked .card .tag { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .worked .card .big {
+    font-family: var(--font-mono);
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 0.55rem 0 0.1rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .worked .card .big small { font-size: 0.9rem; color: var(--ink-soft); font-weight: 400; }
+  .worked .card .sub { font-size: 0.78rem; color: var(--ink-soft); }
+  .worked .card.crit .big { color: var(--stamp); }
+  .worked .card.low .big { color: var(--seal); }
+
+  .refs { font-size: 0.88rem; }
+  .refs li { margin-bottom: 0.55rem; color: var(--ink-soft); }
+  .refs b { color: var(--ink); font-weight: 600; }
+
+  .filemap { font-size: 0.85rem; }
+  .filemap td:first-child { font-family: var(--font-mono); color: var(--seal); }
+
+  footer.end {
+    border-top: 1px solid var(--rule);
+    margin-top: 3.5rem;
+    padding-top: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>
+
+<div class="masthead">
+  <span>Weight-of-Evidence Shadow Scoring <span class="dot">·</span> Working Paper</span>
+  <span>§1–10</span>
+</div>
+
+<main>
+  <p class="kicker">Shadow Index Project — Technical Methodology</p>
+  <h1 class="title">A Deterministic Weight-of-Evidence Framework for Firm-Level Shadow Economy Risk, with Confidence Decoupled from Direction</h1>
+  <p class="subtitle">How the scorecard, the confidence metric, and the 
+LLM narrative layer actually work — traced line by line to the code that
+ runs them.</p>
+
+  <div class="stamp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l2.5 2.5L16 9"></path></svg>
+    Prototype — synthetic demonstration data
+  </div>
+
+  <div class="byline">
+    <span><b>System</b> Shadow Index</span>
+    <span><b>Scope</b> firm-level scoring (frontend) + narrative synthesis (backend)</span>
+    <span><b>Status</b> deterministic scorecard live; audit-label calibration not yet run</span>
+    <span><b>Revision</b> v3</span>
+  </div>
+
+  <div class="abstract">
+    <p class="label">Abstract</p>
+    <p>
+      We describe a two-part system for flagging firm-level involvement 
+in Uzbekistan's shadow economy from a prototype dataset: a deterministic
+ <em>weight-of-evidence scorecard</em> that converts seven firm-level forensic contradiction checks into a probability, a risk score, and — critically — a <em>confidence</em>
+ figure computed independently of the probability's direction; and a 
+downstream large-language-model layer that turns the scorecard's output 
+into a plain-language case narrative without ever touching the 
+arithmetic. The central methodological claim is narrow and falsifiable: 
+probability answers <em>which way the evidence points</em>, confidence answers <em>how much and how decisive the evidence is</em>,
+ and conflating the two — which the system's first implementation did — 
+produces a number that looks precise but silently discards half of what 
+the evidence actually says. We give the exact formulas, the calibration 
+choices behind them, three fully-traced worked examples against real 
+code paths, and an unusually explicit accounting of what in this 
+pipeline is real math versus illustrative demonstration data.
+    </p>
+  </div>
+
+  <section id="s1">
+    <h2 class="sec"><span class="num">1</span> The problem with one number</h2>
+    <p class="lede">
+      Every firm-level risk system eventually has to answer two questions that are easy to mistake for one: <em>how likely is this firm to be involved in the shadow economy</em>, and <em>how sure are we</em>?
+ The first implementation of this system's "AI Shadow Economy Analysis" 
+card answered both with the same number, displayed twice — a 1–10 score 
+derived from a probability, and that same probability shown again 
+underneath the word "confidence."
+    </p>
+    <p>
+      The failure mode is concrete. A clean firm with seven forensic 
+checks all reading comfortably compliant would report a low probability 
+(correctly) and, under the old design, a low "confidence" alongside it —
+ as if having strong, complete evidence that a firm is <em>not</em> 
+involved somehow made the system less sure. Conversely a firm with two 
+signals that had barely tipped over their statutory threshold would 
+report the same inflated confidence as a firm where every check was 
+decisively, unambiguously flagged. Confidence, in other words, was 
+tracking the score's magnitude, not the evidence's quality.
+    </p>
+    <p>
+      Section 5 gives the fix: confidence is computed from <em>evidence coverage</em> and <em>decisiveness</em>
+ — quantities that don't know or care which direction the probability 
+points. Sections 3–4 first establish what the evidence actually is and 
+how it becomes a probability at all.
+    </p>
+  </section>
+
+  <section id="s2">
+    <h2 class="sec"><span class="num">2</span> System architecture</h2>
+    <p>
+      The pipeline has five parts. Four are deterministic arithmetic; 
+the fifth is a schema-constrained language model that is structurally 
+prevented from touching a single number the other four produce.
+    </p>
+
+    <figure>
+      <div class="diagram-frame">
+        <svg viewBox="0 0 760 620" role="img" aria-label="Business record flows into Layer A forensic signals, then into a single Layer B/C computation that outputs both probability/score and an independently-derived confidence figure; Layer D's regional macro context reaches Layer E through a separate, dashed, clearly secondary path; Layer E synthesizes the primary evidence and secondary context into a structured narrative report.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+          <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5">
+
+            <rect x="180" y="18" width="300" height="42" rx="2" fill="var(--surface)" stroke="currentColor" stroke-width="1"></rect>
+            <text x="330" y="35" text-anchor="middle" font-weight="600">Business record</text>
+            <text x="330" y="50" text-anchor="middle" fill="var(--ink-soft)" font-size="10">businesses.js · profile + declared filings</text>
+
+            <line x1="330" y1="60" x2="330" y2="93" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+
+            <rect x="90" y="96" width="480" height="56" rx="2" fill="var(--surface)" stroke="currentColor" stroke-width="1"></rect>
+            <text x="330" y="118" text-anchor="middle" font-weight="600">LAYER A — Forensic Contradiction Rules</text>
+            <text x="330" y="134" text-anchor="middle" fill="var(--ink-soft)" font-size="10">forensics.js · 7 same-document consistency checks</text>
+            <text x="330" y="147" text-anchor="middle" fill="var(--ink-soft)" font-size="10">wage bunching · invoice chain · POS-vs-revenue · night/day power · losses · 2× customs</text>
+
+            <line x1="330" y1="152" x2="330" y2="187" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+            <text x="336" y="172" fill="var(--ink-soft)" font-size="10">7 raw signal values</text>
+
+            <rect x="70" y="190" width="520" height="80" rx="2" fill="var(--surface)" stroke="var(--seal)" stroke-width="1.4"></rect>
+            <text x="330" y="212" text-anchor="middle" font-weight="600">LAYER B/C — Weight-of-Evidence Scorecard</text>
+            <text x="330" y="228" text-anchor="middle" fill="var(--ink-soft)" font-size="10">shadow-score.js · one pass over the same 7 signals</text>
+            <text x="330" y="245" text-anchor="middle" fill="var(--seal)" font-size="10.5">logit(prior) + Σ(weight·z) → probability, score</text>
+            <text x="330" y="260" text-anchor="middle" fill="var(--seal)" font-size="10.5">coverage × decisiveness → confidence (independent)</text>
+
+            <rect x="590" y="140" width="150" height="92" rx="2" fill="var(--surface)" stroke="currentColor" stroke-width="1"></rect>
+            <text x="665" y="162" text-anchor="middle" font-weight="600">LAYER D</text>
+            <text x="665" y="177" text-anchor="middle" font-weight="600">Regional Context</text>
+            <text x="665" y="195" text-anchor="middle" fill="var(--ink-soft)" font-size="9.5">mimic-data.js</text>
+            <text x="665" y="209" text-anchor="middle" fill="var(--ink-soft)" font-size="9.5">11 causes + 6</text>
+            <text x="665" y="221" text-anchor="middle" fill="var(--ink-soft)" font-size="9.5">indicators, illustrative</text>
+
+            <line x1="330" y1="270" x2="330" y2="428" stroke="var(--seal)" stroke-width="2" marker-end="url(#arrow)"></line>
+            <text x="336" y="360" fill="var(--seal)" font-size="10">score · confidence</text>
+            <text x="336" y="374" fill="var(--seal)" font-size="10">· evidence[] — primary</text>
+
+            <line x1="640" y1="232" x2="500" y2="428" stroke="currentColor" stroke-opacity="0.55" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"></line>
+            <text x="560" y="330" fill="var(--ink-soft)" font-size="10">secondary</text>
+            <text x="560" y="343" fill="var(--ink-soft)" font-size="10">context only</text>
+
+            <rect x="140" y="430" width="400" height="72" rx="2" fill="var(--surface)" stroke="var(--seal)" stroke-width="1.4"></rect>
+            <text x="340" y="453" text-anchor="middle" font-weight="600">LAYER E — LLM Narrative Synthesis</text>
+            <text x="340" y="469" text-anchor="middle" fill="var(--ink-soft)" font-size="10">gemini.js · Gemini 3.6 Flash · temp 0.6</text>
+            <text x="340" y="484" text-anchor="middle" fill="var(--ink-soft)" font-size="10">JSON-schema constrained · read-only, no scoring authority</text>
+
+            <line x1="340" y1="502" x2="340" y2="557" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+            <text x="346" y="533" fill="var(--ink-soft)" font-size="10">structured JSON report</text>
+
+            <rect x="210" y="560" width="260" height="40" rx="2" fill="var(--surface)" stroke="currentColor" stroke-width="1"></rect>
+            <text x="340" y="585" text-anchor="middle" font-weight="600">Report UI + PDF export</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        Figure 1. Layers B and C are not sequential stages — they are 
+two outputs of one pass over Layer A's signals (§4–5). Layer D reaches 
+the narrative layer through a visually and instructionally secondary 
+path: the system prompt (§7) explicitly forbids treating regional macro 
+context as evidence against a specific firm.
+      </figcaption>
+    </figure>
+
+    <p>
+      This differs from an earlier draft specification for this project 
+in one deliberate way: that draft named a PU-learning classifier, Manski
+ partial-identification bounds, and a Fay–Herriot small-area estimator 
+as parts of the pipeline. None of those are implemented. This paper 
+documents what runs today and files the rest under Roadmap (§9) rather 
+than presenting aspiration as architecture.
+    </p>
+  </section>
+
+  <section id="s3">
+    <h2 class="sec"><span class="num">3</span> Layer A — forensic contradiction signals</h2>
+    <p>
+      Every signal in Layer A tests a firm's own filings against each 
+other or against a second, independently-sourced record of the same 
+event — never against a peer average. A firm's declared revenue either 
+matches its point-of-sale settlement volume or it doesn't; that is a 
+same-firm arithmetic fact, not a statistical inference. This is what 
+makes the signals usable as hard evidence rather than circumstantial 
+pattern-matching.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <caption>Table 1 — the seven signals (<span class="code-inline">forensics.js</span>)</caption>
+        <thead>
+          <tr><th>Signal</th><th>Tests</th><th>Flag condition</th><th>Sector-gated</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Wage bunching</td><td>share of staff paid exactly minimum wage (1,050,000 UZS/mo)</td><td class="mono">share &gt; 30%</td><td>no</td></tr>
+          <tr><td>VAT invoice chain</td><td>declared sale vs. counterparty's declared purchase, same transaction</td><td class="mono">gap &gt; 15%</td><td>no</td></tr>
+          <tr><td>Night/day electricity</td><td>off-hours vs. daytime industrial power draw ratio</td><td class="mono">ratio &gt; 0.55</td><td>no</td></tr>
+          <tr><td>POS vs. declared revenue</td><td>card + fiscal-receipt volume vs. declared revenue</td><td class="mono">ratio &gt; 1.4×</td><td>no</td></tr>
+          <tr><td>Persistent losses</td><td>consecutive loss-making years while still operating</td><td class="mono">≥ 3 yrs <em>and</em> status = Active</td><td>no</td></tr>
+          <tr><td>Mirror trade statistics</td><td>customs-declared import value vs. UN Comtrade partner-country export declaration</td><td class="mono">gap &gt; 20%</td><td>yes</td></tr>
+          <tr><td>Customs value vs. COGS</td><td>customs-declared import value vs. declared cost of goods sold</td><td class="mono">gap &gt; 20%</td><td>yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      "Sector-gated" means the two customs checks are only <span class="code-inline">applicable</span>
+ for the nine trade-exposed sectors (wholesale &amp; retail, logistics, 
+manufacturing, construction, textiles, mining, food processing, 
+agriculture, automotive trade) — a professional-services or software 
+firm has no import declarations to check against, and the scorecard 
+treats that as missing evidence rather than as a clean result. This 
+distinction turns out to matter a great deal for confidence (§5).
+    </p>
+    <p>
+      Each signal's flag boolean is the single source of truth for 
+"contradiction found" throughout the system — the UI's Forensic Signals 
+card and the scorecard's probability computation both read the same 
+condition, so the two can never disagree about whether a line was 
+crossed.
+    </p>
+  </section>
+
+  <section id="s4">
+    <h2 class="sec"><span class="num">4</span> Layer B — the scorecard</h2>
+    <p>
+      The scoring method is a <em>weight-of-evidence logistic scorecard</em>
+ — the same family of model used in credit-risk underwriting (Siddiqi, 
+2012) and recommended by the OECD for tax administrations before enough 
+audit-verified outcomes exist to fit a full regression. Each applicable 
+signal contributes a log-odds term sized by how far past its statutory 
+threshold the firm sits; the terms sum under a conditional-independence 
+assumption and pass through a logistic link.
+    </p>
+
+    <h3 class="sub">4.1 Peer-cohort prior</h3>
+    <p>
+      Scoring starts from a prior tied to the firm's baseline 
+sector/region risk tier, not a single flat rate for every firm. This is 
+the direct fix for a "detection-density" bias — an unadjusted 
+administrative index tends to flag whichever districts have the most 
+digital paper trail to check, not the most actual informality — because 
+it means a Critical-tier firm with clean signals settles back near its 
+peers instead of being auto-flagged by tier alone.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption>Table 2 — prior probability by baseline tier</caption>
+        <thead><tr><th>Tier</th><th class="num">Prior P</th><th class="num">logit(P)</th></tr></thead>
+        <tbody>
+          <tr><td>Low</td><td class="num">4%</td><td class="num">−3.178</td></tr>
+          <tr><td>Moderate</td><td class="num">10%</td><td class="num">−2.197</td></tr>
+          <tr><td>Elevated</td><td class="num">20%</td><td class="num">−1.386</td></tr>
+          <tr><td>Critical</td><td class="num">33%</td><td class="num">−0.708</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">4.2 Threshold, scale, and evidentiary weight</h3>
+    <p>
+      Each signal has a <span class="code-inline">threshold</span> (Table 1's flag line, exactly), a <span class="code-inline">scale</span> (how far past that line counts as one full unit of evidence), and a <span class="code-inline">weight</span>
+ (evidentiary strength — higher for same-document contradictions, lower 
+for peer-relative patterns that have innocent explanations on their 
+own).
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption>Table 3 — scorecard parameters</caption>
+        <thead><tr><th>Signal</th><th class="num">Threshold</th><th class="num">Scale</th><th class="num">Weight</th></tr></thead>
+        <tbody>
+          <tr><td>POS vs. revenue</td><td class="num">1.40</td><td class="num">0.40</td><td class="num">1.1</td></tr>
+          <tr><td>VAT invoice chain</td><td class="num">0.15</td><td class="num">0.15</td><td class="num">0.9</td></tr>
+          <tr><td>Customs vs. COGS</td><td class="num">0.20</td><td class="num">0.20</td><td class="num">0.8</td></tr>
+          <tr><td>Mirror trade</td><td class="num">0.20</td><td class="num">0.20</td><td class="num">0.7</td></tr>
+          <tr><td>Wage bunching</td><td class="num">0.30</td><td class="num">0.20</td><td class="num">0.5</td></tr>
+          <tr><td>Night/day electricity</td><td class="num">0.55</td><td class="num">0.20</td><td class="num">0.5</td></tr>
+          <tr><td>Persistent losses</td><td class="num">3 yrs</td><td class="num">2 yrs</td><td class="num">0.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">4.3 The formula</h3>
+    <div class="formula">z_i        = clip( max(0, raw_i − threshold_i) / scale_i,  0, 3 )
+contribution_i = weight_i × z_i
+log-odds   = logit(prior) + Σ contribution_i
+P          = sigmoid(log-odds), clipped to [0.01, 0.99]
+score      = clip( round(1 + 9·P), 1, 10 )</div>
+    <p>
+      A signal that sits <em>at or below</em> its threshold contributes 
+exactly zero — "no evidence of a problem" is not the same as "evidence 
+there isn't one," and the formula doesn't let a clean reading 
+manufacture negative suspicion. The cap at <span class="code-inline">z = 3</span>
+ is a conservatism device: no single signal, however extreme, can alone 
+drive the probability to certainty. §4.4 shows it engaging.
+    </p>
+
+    <h3 class="sub">4.4 Worked example — full derivation</h3>
+    <p>
+      <b>Termiz Chegara Logistika</b> (Critical baseline, Logistics &amp; Transport, status Active) trips all seven checks. Every term below is the live output of <span class="code-inline">computeShadowProbability()</span>:
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption>Table 4 — Termiz Chegara Logistika, full contribution trace</caption>
+        <thead><tr><th>Signal</th><th class="num">raw</th><th class="num">excess</th><th class="num">z</th><th class="num">weight·z</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td>POS vs. revenue</td><td class="num">3.31×</td><td class="num">1.91</td><td class="num">3.00<sup>†</sup></td><td class="num">3.300</td></tr>
+          <tr><td>VAT invoice chain</td><td class="num">55%</td><td class="num">0.40</td><td class="num">2.67</td><td class="num">2.400</td></tr>
+          <tr><td>Customs vs. COGS</td><td class="num">49%</td><td class="num">0.29</td><td class="num">1.45</td><td class="num">1.160</td></tr>
+          <tr><td>Wage bunching</td><td class="num">75.8%</td><td class="num">0.46</td><td class="num">2.29</td><td class="num">1.145</td></tr>
+          <tr><td>Night/day electricity</td><td class="num">91%</td><td class="num">0.36</td><td class="num">1.80</td><td class="num">0.900</td></tr>
+          <tr><td>Mirror trade</td><td class="num">45.1%</td><td class="num">0.25</td><td class="num">1.26</td><td class="num">0.878</td></tr>
+          <tr><td>Persistent losses</td><td class="num">6 yrs</td><td class="num">3</td><td class="num">1.50</td><td class="num">0.600</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem;color:var(--ink-soft)">† raw z would be 4.78; the cap at 3 engages here — see §4.3.</p>
+    <div class="formula">log-odds = logit(0.33) + (3.300+2.400+1.160+1.145+0.900+0.878+0.600)
+         = −0.708 + 10.383  =  <b>9.675</b>
+P        = sigmoid(9.675) → clipped  =  <b>99%</b>
+score    = round(1 + 9×0.99) = <b>10 / 10</b>  (tier: Critical)</div>
+  </section>
+
+  <section id="s5">
+    <h2 class="sec"><span class="num">5</span> Layer C — confidence, decoupled from direction</h2>
+    <p>
+      Confidence answers a different question than probability: not <em>which way does the evidence point</em>, but <em>how much evidence is there, and how decisively does it sit away from the line that separates "flagged" from "clean"</em>. It is built from two quantities, computed over the same signal loop as §4 but summed independently of the sign of <span class="code-inline">z</span>.
+    </p>
+
+    <h3 class="sub">5.1 Coverage</h3>
+    <p>
+      The fraction of the seven possible checks that were even <span class="code-inline">applicable</span>
+ to this firm. A non-trade-exposed firm has no customs record to check 
+and caps out at 5/7; a firm under review has its persistent-losses check
+ gated off entirely (§3), capping it at 6/7. Fewer applicable checks 
+means a narrower evidence base, independent of what the available checks
+ say.
+    </p>
+
+    <h3 class="sub">5.2 Decisiveness</h3>
+    <p>
+      For every applicable signal, an unsigned distance from the 
+threshold — a value sitting exactly on the line is the weakest possible 
+evidence <em>regardless of which side it lands on</em>; a value far from the line in either direction is strong evidence either way. The distance saturates through <span class="code-inline">1&nbsp;−&nbsp;e<sup>−x</sup></span> so that a couple of extreme signals can't alone manufacture near-certainty.
+    </p>
+    <div class="formula">distance_i    = | raw_i − threshold_i | / scale_i
+decisiveness_i = 1 − e^(−distance_i)
+coverage       = applicable_count / 7
+avg_decisive   = mean(decisiveness_i)  over applicable signals
+confidence     = clip( round( 100×(0.3×coverage + 0.7×avg_decisive) ), 10, 96 )</div>
+    <p>
+      The 70/30 split weights how-decisive over how-much-evidence — a 
+firm with complete coverage but every value sitting exactly on its 
+threshold line should not out-rank a firm with slightly fewer applicable
+ checks whose values are unambiguous. Confidence is clipped to [10, 96]:
+ never absolute certainty, and never treated as fully uninformative even
+ from a single decisive signal.
+    </p>
+
+    <h3 class="sub">5.3 Three cases, traced</h3>
+    <p>The point of §5 is empirical, not just definitional — here are three real businesses run through the live scorecard:</p>
+    <div class="worked">
+      <div class="card low">
+        <div class="tag">Toshkent Metall Profil</div>
+        <h4>All 7 checks clean</h4>
+        <div class="big">2<small>/10 score</small></div>
+        <div class="sub">P = 10% · confidence = <b>59%</b></div>
+        <div class="sub">coverage 86% (6/7, losses gated — status Under Review) · avg. decisiveness 48%</div>
+      </div>
+      <div class="card">
+        <div class="tag">Andijon Mashinasozlik Zavodi</div>
+        <h4>Flagged, but marginally</h4>
+        <div class="big">9<small>/10 score</small></div>
+        <div class="sub">P = 84% · confidence = <b>54%</b></div>
+        <div class="sub">two flags sit within 1 point of their threshold (wage bunching 30.9% vs. 30%; COGS gap 20.3% vs. 20%)</div>
+      </div>
+      <div class="card crit">
+        <div class="tag">Termiz Chegara Logistika</div>
+        <h4>All 7 checks, decisively flagged</h4>
+        <div class="big">10<small>/10 score</small></div>
+        <div class="sub">P = 99% · confidence = <b>89%</b></div>
+        <div class="sub">coverage 100% (7/7) · avg. decisiveness 84%</div>
+      </div>
+    </div>
+    <p>
+      Read Toshkent and Termiz side by side: opposite ends of the 
+probability scale, both landing at high confidence — because in both 
+cases the evidence is complete and unambiguous, just pointing in 
+different directions. Andijon is the case that actually stress-tests the
+ design: a <em>high</em> score built partly out of two barely-tipped-over signals lands at meaningfully <em>lower</em>
+ confidence than either of the decisive cases, despite outscoring 
+Toshkent by seven points. A system that only ever showed probability 
+would have no way to say that.
+    </p>
+
+    <div class="callout note">
+      <p class="label">Why not just widen a confidence interval instead?</p>
+      <p>
+        A Wilson or Wald interval around the probability would conflate 
+the same two things this section separates — interval width in a 
+logistic model is driven mechanically by how far log-odds sits from 
+zero, which is exactly the "which way" quantity, not an independent "how
+ much evidence" quantity. Coverage and decisiveness were chosen because 
+they're computable directly from what's actually missing or ambiguous in
+ the evidence, not derived algebraically from the probability itself.
+      </p>
+    </div>
+  </section>
+
+  <section id="s6">
+    <h2 class="sec"><span class="num">6</span> Layer D — regional macro context</h2>
+    <p>
+      Independently of firm-level scoring, each of Uzbekistan's 14 
+regions carries a MIMIC-inspired macro dataset: 11 "causes" (tax burden,
+ labor-market rigidity, corruption control, unemployment, GDP per 
+capita, and others) and 6 "indicators" (currency-demand ratio, 
+large-denomination banknote share, electricity-consumption index, 
+labor-force participation, real GDP growth) in the tradition of 
+Schneider &amp; Enste (2000).
+    </p>
+    <p>
+      Every variable's value is generated deterministically: linear 
+interpolation between a literature-informed plausible range, positioned 
+by the region's existing shadow-index score, plus a small deterministic 
+jitter keyed to the region and variable name so figures aren't perfectly
+ collinear. This is worth stating with complete precision, because it is
+ easy to <em>imply</em> more than this: <b>no structural equation model is fitted.</b>
+ There are no estimated factor loadings, no latent-variable regression, 
+nothing resembling the causal identification a real MIMIC study 
+requires. The layer exists to give the LLM narrative (§7) regional 
+texture to write about — it is a presentation dataset, not a statistical
+ estimate, and it never contributes a term to the firm-level probability
+ in §4.
+    </p>
+    <div class="callout limit">
+      <p class="label">Known limitation</p>
+      <p>
+        Breusch (2005) documents exactly how MIMIC-style claims mislead 
+when the "model" is asserted rather than fitted against real covariance 
+structure. Layer D avoids that failure mode by not claiming to be a 
+fitted model in the first place — but a reader skimming the UI without 
+this paper could still mistake "MIMIC causes/indicators" for real 
+regional statistics. The system prompt in §7 is the only enforcement 
+mechanism preventing that conflation from reaching the narrative output.
+      </p>
+    </div>
+  </section>
+
+  <section id="s7">
+    <h2 class="sec"><span class="num">7</span> Layer E — LLM narrative synthesis</h2>
+    <p>
+      A single Gemini 3.6 Flash call, constrained to a nine-field JSON schema (<span class="code-inline">notes</span>, <span class="code-inline">executiveSummary</span>, <span class="code-inline">forensicFindings</span>, <span class="code-inline">causesAnalysis</span>, <span class="code-inline">indicatorsAnalysis</span>, <span class="code-inline">conclusion</span>, <span class="code-inline">estimatedIndex</span>, <span class="code-inline">confidencePercent</span>, <span class="code-inline">keyRiskFactors</span>),
+ turns the scorecard's already-computed numbers plus Layer D's regional 
+context into a case narrative. It has no scoring authority: every number
+ in the "Preliminary AI Screening" block handed to the model — score, 
+probability, confidence, per-signal evidence — was computed in §4–5 
+before the model ever runs.
+    </p>
+    <p>The system instruction enforces the asymmetry Figure 1 draws visually, in three explicit rules:</p>
+    <ol>
+      <li>Forensic signals (§3) are <em>direct</em> evidence about this specific firm; a single flagged signal should anchor the assessment.</li>
+      <li>MIMIC causes/indicators (§6) are regional context only — the 
+model is instructed never to treat a macro variable alone as evidence 
+against a specific firm.</li>
+      <li><span class="code-inline">estimatedIndex</span> must stay within 2 points of the scorecard's own score <em>unless</em>
+ a forensic signal is flagged, in which case the model may diverge 
+further but must cite the specific signal driving the divergence.</li>
+    </ol>
+    <p>
+      Every call is logged — console line, local <span class="code-inline">.jsonl</span> file, and an in-memory ring buffer surfaced at <span class="code-inline">GET /api/usage</span>
+ — with prompt/thoughts/completion token counts and latency, so cost and
+ behavior are auditable in aggregate, not just per-report.
+    </p>
+    <div class="callout limit">
+      <p class="label">Known limitation</p>
+      <p>
+        Temperature is set to 0.6, not 0 — meaning the narrative <em>can</em>
+ phrase the same underlying numbers differently across two runs on the 
+same firm. An earlier draft specification for this project called for 
+temperature 0 plus a hard post-hoc check that every numeric token in the
+ output exists in the input payload ("numeric token invariance"). 
+Neither is implemented yet; it is the most concrete, cheapest item in 
+the roadmap (§9).
+      </p>
+    </div>
+  </section>
+
+  <section id="s8">
+    <h2 class="sec"><span class="num">8</span> Validation status</h2>
+    <p>An unusually direct accounting, by design — a scorecard whose 
+limitations are asserted by the same document that built it is either 
+honest or hasn't looked hard enough. Table 5 is the look.</p>
+    <div class="table-wrap">
+      <table>
+        <caption>Table 5 — what's real vs. illustrative, by layer</caption>
+        <thead><tr><th>Layer</th><th>Math</th><th>Underlying data</th></tr></thead>
+        <tbody>
+          <tr><td>A — forensic signals</td><td><span class="pill on">real logic</span> exact threshold comparisons</td><td><span class="pill off">synthetic</span> deterministic per-business mock values</td></tr>
+          <tr><td>B — probability/score</td><td><span class="pill on">real math</span> logistic scorecard, reproducible</td><td>weights/thresholds are literature-informed defaults, <b>not fitted</b> to audit outcomes</td></tr>
+          <tr><td>C — confidence</td><td><span class="pill on">real math</span> coverage × decisiveness</td><td>0.3/0.7 split is a reasoned default, not empirically tuned</td></tr>
+          <tr><td>D — regional context</td><td><span class="pill off">illustrative</span> interpolation, not a fitted SEM</td><td><span class="pill off">synthetic</span> generated, not sourced from GRP/LFS statistics</td></tr>
+          <tr><td>E — narrative</td><td><span class="pill on">schema-constrained</span> generation</td><td>reasons over B–D's outputs; temp 0.6, no invariance check yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The single largest gap is the one every weight-of-evidence 
+scorecard starts with: no audit-verified labels exist yet to check the 
+thresholds and weights in Table 3 against real outcomes. Elkan &amp; 
+Noto's (2008) positive-unlabeled learning correction — the standard way 
+to recover true posterior probabilities once some positives are 
+confirmed and the rest are merely unlabeled rather than known-negative —
+ is the natural next step the moment labeled cases exist, and would 
+replace Table 3's hand-set weights with fitted ones.
+    </p>
+  </section>
+
+  <section id="s9">
+    <h2 class="sec"><span class="num">9</span> Roadmap</h2>
+    <ul>
+      <li><b>Calibrate Table 3 on real outcomes.</b> Once 
+audit-confirmed cases accumulate, fit weights via PU-learning (Elkan 
+&amp; Noto, 2008) instead of literature-informed defaults.</li>
+      <li><b>Numeric-token invariance on Layer E output.</b> Reject and 
+regenerate any narrative containing a figure not traceable to the input 
+payload — cheap, mechanical, and closes the one place this pipeline 
+currently tolerates non-determinism.</li>
+      <li><b>Region-level partial identification.</b> Manski (2003) 
+bounds for aggregating firm-level lower bounds into a district total, 
+rather than treating Layer D as free-standing context.</li>
+      <li><b>Replace Layer D's interpolation with a fitted structural model</b>, or relabel it more conservatively than "MIMIC" until one exists.</li>
+      <li><b>Real administrative data feeds</b> — EHF e-invoicing, 
+Humo/Uzcard POS settlement, ASKUE electricity telemetry, State Customs 
+declarations — behind the statutory data-sharing agreements each 
+requires, replacing the synthetic values in Table 5's right column one 
+signal at a time.</li>
+    </ul>
+  </section>
+
+  <section id="s10">
+    <h2 class="sec"><span class="num">10</span> References</h2>
+    <ul class="refs">
+      <li><b>Siddiqi, N.</b> (2012). <em>Credit Risk Scorecards: Developing and Implementing Intelligent Credit Scoring.</em> Wiley — weight-of-evidence scorecard construction (§4).</li>
+      <li><b>OECD</b> (2017). <em>Compliance Risk Management: Developing Compliance Improvement Plans.</em> Forum on Tax Administration — expert-weighted scorecards as a defensible pre-calibration risk-ranking method (§4, §8).</li>
+      <li><b>Elkan, C. &amp; Noto, K.</b> (2008). "Learning classifiers from only positive and unlabeled data." <em>ACM SIGKDD</em> — posterior recovery from confirmed-positive-only labels (§8, §9).</li>
+      <li><b>Manski, C.</b> (2003). <em>Partial Identification of Probability Distributions.</em> Springer — bounding rather than point-estimating under incomplete identification (§9).</li>
+      <li><b>Schneider, F. &amp; Enste, D.</b> (2000). "Shadow economies: size, causes, and consequences." <em>Journal of Economic Literature</em> — the MIMIC causes/indicators framework Layer D borrows its variable list from (§6).</li>
+      <li><b>Breusch, T.</b> (2005). "The Canadian underground economy: an examination of Giles and Tedds." <em>Canadian Tax Journal</em> — critique of asserted-rather-than-fitted MIMIC claims (§6).</li>
+      <li><b>Pomeranz, D.</b> (2015). "No taxation without information: deterrence and self-enforcement in the VAT." <em>American Economic Review</em> — third-party paper-trail verification, the mechanism behind the invoice-chain check (§3).</li>
+      <li><b>Kleven, H. &amp; Waseem, M.</b> (2013). "Using notches to uncover optimization frictions." <em>Quarterly Journal of Economics</em> — bunching-at-a-threshold as a detectable behavioral signature (§3).</li>
+    </ul>
+  </section>
+
+  <section id="appendix">
+    <h2 class="sec"><span class="num">A</span> Reproducibility map</h2>
+    <p>Every formula in this paper is a direct transcription of running 
+code, not a description of intended behavior. Verify any figure by 
+opening the file it names.</p>
+    <div class="table-wrap">
+      <table class="filemap">
+        <thead><tr><th>Section</th><th>File</th></tr></thead>
+        <tbody>
+          <tr><td>§3 — forensic signals</td><td>src/lib/forensics.js</td></tr>
+          <tr><td>§4–5 — scorecard + confidence</td><td>src/lib/shadow-score.js</td></tr>
+          <tr><td>§6 — regional macro context</td><td>backend/lib/mimic-data.js</td></tr>
+          <tr><td>§7 — LLM prompt + schema</td><td>backend/lib/prompt.js, backend/lib/gemini.js</td></tr>
+          <tr><td>§7 — usage logging</td><td>backend/lib/usage-logger.js</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="end">
+    <span>Shadow Index — Working Paper v3</span>
+    <span>Synthetic demonstration data throughout</span>
+  </footer>
+</main>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
