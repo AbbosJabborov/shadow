@@ -5,15 +5,15 @@ import { useTheme } from "next-themes"
 /**
  * High-performance 3D Neural Particle Constellation Background built with Three.js.
  * Features:
- * - Neural Constellation Particle Network with dynamic mouse tethers
- * - Distance-based adaptive neural connection lines
+ * - Dual Light Blue (Sky Blue) & Light Green (Emerald/Mint) Econometric Node accents
+ * - High-contrast theme adaptation for both Dark and Light modes (clearly visible lines & nodes)
+ * - Real-time theme change responsiveness (updates colors immediately upon toggle)
  * - Interactive Cursor Laser Tracking & Shockwave Impulses
  * - Smooth Mouse & Scroll Parallax
- * - Theme-aware styling (seamless dark & light modes)
  */
 export function Interactive3DBackground({ variant = "hero" }) {
   const containerRef = useRef(null)
-  const { resolvedTheme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
   const shockwavesRef = useRef([])
 
   // Click handler to emit 3D shockwave ripple through the neural constellation
@@ -25,8 +25,8 @@ export function Interactive3DBackground({ variant = "hero" }) {
       x: normX * 85,
       y: normY * 60,
       radius: 0.1,
-      maxRadius: variant === "subtle" ? 55 : 90,
-      speed: 2.4,
+      maxRadius: variant === "subtle" ? 55 : 95,
+      speed: 2.5,
       intensity: 2.2,
       decay: 0.018,
     })
@@ -61,30 +61,41 @@ export function Interactive3DBackground({ variant = "hero" }) {
     container.appendChild(renderer.domElement)
 
     // ----------------------------------------------------
-    // 2. THEME COLOR PALETTE
+    // 2. THEME COLOR PALETTE (Light Blue & Light Green Accents)
     // ----------------------------------------------------
-    const isDark =
-      resolvedTheme === "dark" ||
-      document.documentElement.classList.contains("dark")
-
-    const colors = {
-      particle: isDark ? 0xffffff : 0x0f172a,
-      particleAccent: isDark ? 0x38bdf8 : 0x2563eb,
-      line: isDark ? 0x94a3b8 : 0x64748b,
-      cursorLine: isDark ? 0x38bdf8 : 0x3b82f6,
+    const checkIsDark = () => {
+      return (
+        resolvedTheme === "dark" ||
+        theme === "dark" ||
+        document.documentElement.classList.contains("dark")
+      )
     }
 
+    let isDark = checkIsDark()
+
+    const getPalette = (dark) => ({
+      particleBase: dark ? 0xf1f5f9 : 0x1e293b,
+      particleSkyBlue: dark ? 0x38bdf8 : 0x0284c7, // Light Sky Blue
+      particleMintGreen: dark ? 0x34d399 : 0x059669, // Light Mint Green
+      line: dark ? 0x64748b : 0x475569, // Clearly visible in light mode
+      cursorLine: dark ? 0x38bdf8 : 0x0284c7,
+    })
+
+    let palette = getPalette(isDark)
+
     // ----------------------------------------------------
-    // 3. NEURAL PARTICLE CLUSTER (Econometric Data Nodes)
+    // 3. NEURAL PARTICLE CLUSTER (Light Blue + Light Green Nodes)
     // ----------------------------------------------------
     const particleCount = isSubtle ? 85 : 180
     const particleGeo = new THREE.BufferGeometry()
     const positions = new Float32Array(particleCount * 3)
     const velocities = []
     const particleColors = new Float32Array(particleCount * 3)
+    const nodeTypes = [] // 0 = base, 1 = sky blue, 2 = mint green
 
-    const colorPrimary = new THREE.Color(colors.particle)
-    const colorAccent = new THREE.Color(colors.particleAccent)
+    const colorBase = new THREE.Color(palette.particleBase)
+    const colorSky = new THREE.Color(palette.particleSkyBlue)
+    const colorMint = new THREE.Color(palette.particleMintGreen)
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
@@ -98,9 +109,19 @@ export function Interactive3DBackground({ variant = "hero" }) {
         z: (Math.random() - 0.5) * 0.035,
       })
 
-      // Accent color node distribution
-      const isAccent = Math.random() > 0.7
-      const chosenColor = isAccent ? colorAccent : colorPrimary
+      // Multi-color node assignment: 40% Base, 30% Light Blue, 30% Light Green
+      const rnd = Math.random()
+      let chosenColor = colorBase
+      let type = 0
+      if (rnd < 0.35) {
+        chosenColor = colorSky
+        type = 1
+      } else if (rnd < 0.70) {
+        chosenColor = colorMint
+        type = 2
+      }
+
+      nodeTypes.push(type)
       particleColors[i3] = chosenColor.r
       particleColors[i3 + 1] = chosenColor.g
       particleColors[i3 + 2] = chosenColor.b
@@ -109,7 +130,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
     particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3))
     particleGeo.setAttribute("color", new THREE.BufferAttribute(particleColors, 3))
 
-    // High-tech glowing circular point texture via Canvas
+    // High-tech circular glowing point texture via Canvas
     const createCircleTexture = () => {
       const canvas = document.createElement("canvas")
       canvas.width = 64
@@ -117,8 +138,8 @@ export function Interactive3DBackground({ variant = "hero" }) {
       const ctx = canvas.getContext("2d")
       const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 30)
       grad.addColorStop(0, "rgba(255, 255, 255, 1)")
-      grad.addColorStop(0.35, "rgba(255, 255, 255, 0.85)")
-      grad.addColorStop(0.7, "rgba(255, 255, 255, 0.25)")
+      grad.addColorStop(0.35, "rgba(255, 255, 255, 0.90)")
+      grad.addColorStop(0.7, "rgba(255, 255, 255, 0.35)")
       grad.addColorStop(1, "rgba(255, 255, 255, 0)")
       ctx.fillStyle = grad
       ctx.fillRect(0, 0, 64, 64)
@@ -130,12 +151,10 @@ export function Interactive3DBackground({ variant = "hero" }) {
 
     const particleMaterial = new THREE.PointsMaterial({
       vertexColors: true,
-      size: isDark ? 2.8 : 2.4,
+      size: isDark ? 3.2 : 3.0,
       map: createCircleTexture(),
       transparent: true,
-      opacity: isDark
-        ? isSubtle ? 0.55 : 0.90
-        : isSubtle ? 0.40 : 0.75,
+      opacity: isDark ? 0.92 : 0.85,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
     })
@@ -144,9 +163,9 @@ export function Interactive3DBackground({ variant = "hero" }) {
     scene.add(particleSystem)
 
     // ----------------------------------------------------
-    // 4. INTER-PARTICLE CONSTELLATION LINES
+    // 4. INTER-PARTICLE CONSTELLATION LINES (High visibility)
     // ----------------------------------------------------
-    const maxLineCount = isSubtle ? 200 : 420
+    const maxLineCount = isSubtle ? 200 : 450
     const linePositions = new Float32Array(maxLineCount * 6)
     const lineGeo = new THREE.BufferGeometry()
     lineGeo.setAttribute(
@@ -155,11 +174,9 @@ export function Interactive3DBackground({ variant = "hero" }) {
     )
 
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: colors.line,
+      color: palette.line,
       transparent: true,
-      opacity: isDark
-        ? isSubtle ? 0.16 : 0.28
-        : isSubtle ? 0.10 : 0.18,
+      opacity: isDark ? 0.30 : 0.35, // Clear, crisp visibility in both modes
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
     })
@@ -170,7 +187,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
     // ----------------------------------------------------
     // 5. CURSOR TETHER LINES (Neural connections to pointer)
     // ----------------------------------------------------
-    const maxCursorLines = 16
+    const maxCursorLines = 20
     const cursorLinePositions = new Float32Array(maxCursorLines * 6)
     const cursorLineGeo = new THREE.BufferGeometry()
     cursorLineGeo.setAttribute(
@@ -179,9 +196,9 @@ export function Interactive3DBackground({ variant = "hero" }) {
     )
 
     const cursorLineMaterial = new THREE.LineBasicMaterial({
-      color: colors.cursorLine,
+      color: palette.cursorLine,
       transparent: true,
-      opacity: isDark ? 0.65 : 0.45,
+      opacity: isDark ? 0.75 : 0.60,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       linewidth: 2,
     })
@@ -190,7 +207,53 @@ export function Interactive3DBackground({ variant = "hero" }) {
     scene.add(cursorLineSegments)
 
     // ----------------------------------------------------
-    // 6. MOUSE & PARALLAX TRACKING
+    // 6. DYNAMIC THEME OBSERVER & COLOR UPDATE FUNCTION
+    // ----------------------------------------------------
+    const updateThemeColors = () => {
+      const nowDark = checkIsDark()
+      if (nowDark === isDark) return
+      isDark = nowDark
+      palette = getPalette(isDark)
+
+      const cBase = new THREE.Color(palette.particleBase)
+      const cSky = new THREE.Color(palette.particleSkyBlue)
+      const cMint = new THREE.Color(palette.particleMintGreen)
+
+      const colArray = particleGeo.attributes.color.array
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3
+        const type = nodeTypes[i]
+        const col = type === 1 ? cSky : type === 2 ? cMint : cBase
+        colArray[i3] = col.r
+        colArray[i3 + 1] = col.g
+        colArray[i3 + 2] = col.b
+      }
+      particleGeo.attributes.color.needsUpdate = true
+
+      particleMaterial.size = isDark ? 3.2 : 3.0
+      particleMaterial.opacity = isDark ? 0.92 : 0.85
+      particleMaterial.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending
+      particleMaterial.needsUpdate = true
+
+      lineMaterial.color.setHex(palette.line)
+      lineMaterial.opacity = isDark ? 0.30 : 0.35
+      lineMaterial.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending
+      lineMaterial.needsUpdate = true
+
+      cursorLineMaterial.color.setHex(palette.cursorLine)
+      cursorLineMaterial.opacity = isDark ? 0.75 : 0.60
+      cursorLineMaterial.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending
+      cursorLineMaterial.needsUpdate = true
+    }
+
+    const observer = new MutationObserver(updateThemeColors)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    // ----------------------------------------------------
+    // 7. MOUSE & PARALLAX TRACKING
     // ----------------------------------------------------
     let mouseX = 0
     let mouseY = 0
@@ -209,7 +272,6 @@ export function Interactive3DBackground({ variant = "hero" }) {
       mouseX = normX * (isSubtle ? 16 : 30)
       mouseY = normY * (isSubtle ? 12 : 24)
 
-      // Project 2D coordinates to 3D plane
       mouse3D.set(normX * 90, normY * 65, 0)
     }
 
@@ -227,7 +289,6 @@ export function Interactive3DBackground({ variant = "hero" }) {
     window.addEventListener("scroll", handleScroll, { passive: true })
     window.addEventListener("click", handleClick, { passive: true })
 
-    // Resize Handler
     const handleResize = () => {
       if (!container) return
       camera.aspect = window.innerWidth / window.innerHeight
@@ -237,18 +298,18 @@ export function Interactive3DBackground({ variant = "hero" }) {
     window.addEventListener("resize", handleResize)
 
     // ----------------------------------------------------
-    // 7. ANIMATION LOOP & NEURAL PHYSICS
+    // 8. ANIMATION LOOP & NEURAL PHYSICS
     // ----------------------------------------------------
     let animationFrameId
     const startTime = performance.now()
-    const maxConnDist = isSubtle ? 21 : 27
+    const maxConnDist = isSubtle ? 21 : 28
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
 
       const elapsedTime = (performance.now() - startTime) * 0.001
 
-      // Smooth camera parallax with scroll elevation
+      // Smooth camera parallax
       targetCamX += (mouseX - targetCamX) * 0.04
       targetCamY += (mouseY - targetCamY) * 0.04
       const scrollOffset = scrollY * 0.02
@@ -256,7 +317,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
       camera.position.y = (isSubtle ? -4 : 0) + targetCamY - Math.min(scrollOffset, 30)
       camera.lookAt(0, -scrollOffset * 0.4, 0)
 
-      // Update Shockwaves
+      // Shockwave physics
       const activeShockwaves = shockwavesRef.current
       for (let s = activeShockwaves.length - 1; s >= 0; s--) {
         const sw = activeShockwaves[s]
@@ -268,7 +329,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
         }
       }
 
-      // Update Neural Particles & Connection Geometry
+      // Particle physics & Line connections
       const pArray = particleGeo.attributes.position.array
       let lineIdx = 0
       let cursorLineIdx = 0
@@ -276,12 +337,10 @@ export function Interactive3DBackground({ variant = "hero" }) {
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3
 
-        // Move particles along velocity vectors
         pArray[i3] += velocities[i].x
         pArray[i3 + 1] += velocities[i].y
         pArray[i3 + 2] += velocities[i].z
 
-        // Soft bounding box bounce
         const bX = isSubtle ? 92 : 88
         const bY = isSubtle ? 66 : 62
         const bZ = isSubtle ? 40 : 45
@@ -290,7 +349,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
         if (Math.abs(pArray[i3 + 1]) > bY) velocities[i].y *= -1
         if (Math.abs(pArray[i3 + 2]) > bZ) velocities[i].z *= -1
 
-        // Shockwave kinetic burst on nodes
+        // Shockwave impact
         for (let s = 0; s < activeShockwaves.length; s++) {
           const sw = activeShockwaves[s]
           const sDx = pArray[i3] - sw.x
@@ -306,7 +365,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
           }
         }
 
-        // Mouse magnetic repulsion & cursor tether laser
+        // Pointer tether & magnetic repulsion
         if (isMouseActive) {
           const mDx = pArray[i3] - mouse3D.x
           const mDy = pArray[i3 + 1] - mouse3D.y
@@ -319,8 +378,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
             pArray[i3 + 1] += (mDy / distToMouse) * repelForce
           }
 
-          // Connect nearest nodes to cursor
-          if (distToMouse < 32 && cursorLineIdx < maxCursorLines * 6) {
+          if (distToMouse < 34 && cursorLineIdx < maxCursorLines * 6) {
             cursorLinePositions[cursorLineIdx++] = pArray[i3]
             cursorLinePositions[cursorLineIdx++] = pArray[i3 + 1]
             cursorLinePositions[cursorLineIdx++] = pArray[i3 + 2]
@@ -330,7 +388,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
           }
         }
 
-        // Connect nearby neighbor nodes
+        // Connection lines between neighbors
         for (let j = i + 1; j < particleCount; j++) {
           if (lineIdx >= maxLineCount * 6) break
 
@@ -370,10 +428,11 @@ export function Interactive3DBackground({ variant = "hero" }) {
     animate()
 
     // ----------------------------------------------------
-    // 8. CLEANUP
+    // 9. CLEANUP
     // ----------------------------------------------------
     return () => {
       cancelAnimationFrame(animationFrameId)
+      observer.disconnect()
       window.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mouseleave", handleMouseLeave)
       window.removeEventListener("scroll", handleScroll)
@@ -392,7 +451,7 @@ export function Interactive3DBackground({ variant = "hero" }) {
         container.removeChild(renderer.domElement)
       }
     }
-  }, [resolvedTheme, variant, handleClick])
+  }, [theme, resolvedTheme, variant, handleClick])
 
   return (
     <div
