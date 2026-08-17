@@ -32,6 +32,10 @@ import {
   Sparkles,
   Info,
   BookOpen,
+  TrendingUp,
+  Database,
+  Building2,
+  Zap,
 } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -39,7 +43,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { FORENSIC_DEFINITIONS } from "@/lib/forensics"
-import { REGIONS } from "@/lib/regions"
 
 // Prior logit constants
 const PRIOR_TABLE = {
@@ -48,6 +51,31 @@ const PRIOR_TABLE = {
   Elevated: { priorP: 0.20, logit: -1.386 },
   Critical: { priorP: 0.33, logit: -0.708 },
 }
+
+// MIMIC Macro Causes (Layer D)
+const MIMIC_CAUSES = [
+  { name: "Direct Tax Burden", category: "Tax Burden", unit: "% of GDP", effect: "+", desc: "Higher corporate & personal tax rates increase the financial incentive to conceal income." },
+  { name: "Indirect Tax Burden (VAT)", category: "Tax Burden", unit: "% of GDP", effect: "+", desc: "Pushes final retail & consumer service transactions off official accounts." },
+  { name: "Social Security Contributions", category: "Tax Burden", unit: "% of payroll", effect: "+", desc: "Drives informal cash-in-hand wage agreements (envelope wages)." },
+  { name: "Labor Market Rigidity", category: "Regulation", unit: "Index 0-100", effect: "+", desc: "Strict hiring/firing rules and compliance overhead discourage formal contracts." },
+  { name: "Bureaucratic Burden", category: "Regulation", unit: "Index 0-100", effect: "+", desc: "Licensing delays and administrative friction incentivize unlisted operations." },
+  { name: "Control of Corruption & Rule of Law", category: "Institutions", unit: "Index 0-100", effect: "-", desc: "Strong enforcement exponentially raises detection risk and penalties." },
+  { name: "Tax Morale & Public Trust", category: "Institutions", unit: "Index 0-100", effect: "-", desc: "High civic trust correlates with voluntary formal tax compliance." },
+  { name: "Unemployment Rate", category: "Macro Conditions", unit: "%", effect: "+", desc: "Jobless workers seek informal income to replace lost earnings." },
+  { name: "Self-Employment Rate", category: "Macro Conditions", unit: "% of workforce", effect: "+", desc: "Sole proprietors have high opportunity for unmonitored cash trade." },
+  { name: "Inflation Rate", category: "Macro Conditions", unit: "%", effect: "+", desc: "Rapid price inflation destabilizes formal contracts and financial safety." },
+  { name: "GDP per Capita", category: "Macro Conditions", unit: "USD", effect: "-", desc: "Wealthier economies provide stronger formal safety nets and formal jobs." },
+]
+
+// MIMIC Observable Indicators (Layer D)
+const MIMIC_INDICATORS = [
+  { name: "Currency Demand Ratio (M0 / M2)", category: "Monetary Trace", effect: "+", desc: "Shadow and informal transactions rely primarily on physical untraceable cash." },
+  { name: "Large-Denomination Banknotes Share", category: "Monetary Trace", effect: "+", desc: "High-value cash banknotes are disproportionately hoarded for shadow deals." },
+  { name: "Electricity Consumption Index Mismatch", category: "Physical Input", effect: "+", desc: "Underground manufacturing consumes physical power despite zero declared output." },
+  { name: "Labor Force Participation Drop", category: "Labor Market", effect: "-", desc: "Prime-age workers disappearing from official payrolls operate in the informal sector." },
+  { name: "Male Labor Participation (25-54)", category: "Labor Market", effect: "-", desc: "Core working demographic absence directly traces informal employment." },
+  { name: "Official Real GDP Growth Rate", category: "National Output", effect: "-", desc: "Shadow economic activity diverts capital away from recorded state output." },
+]
 
 // Preset businesses from working paper
 const PRESETS = {
@@ -96,10 +124,10 @@ const PRESETS = {
 }
 
 export default function MethodologyPage() {
-  const [selectedLayer, setSelectedLayer] = useState("b")
+  const [selectedLayerTab, setSelectedLayerTab] = useState("all")
   const [simulatorTier, setSimulatorTier] = useState("Critical")
   const [signalValues, setSignalValues] = useState(PRESETS.termiz.values)
-  const [conflationComparisonMode, setConflationComparisonMode] = useState("decoupled") // "conflated" vs "decoupled"
+  const [conflationComparisonMode, setConflationComparisonMode] = useState("decoupled")
 
   // Live calculation for the Simulator
   const simCalculation = useMemo(() => {
@@ -138,7 +166,7 @@ export default function MethodologyPage() {
     const pClamped = Math.min(0.99, Math.max(0.01, rawP))
     const score = Math.min(10, Math.max(1, Math.round(1 + 9 * pClamped)))
 
-    const coverage = 1.0 // 7 of 7 in simulator
+    const coverage = 1.0
     const avgDecisiveness = totalDecisiveness / 7
     const confidence = Math.min(96, Math.max(10, Math.round(100 * (0.3 * coverage + 0.7 * avgDecisiveness))))
 
@@ -154,7 +182,7 @@ export default function MethodologyPage() {
     }
   }, [simulatorTier, signalValues])
 
-  // Chart Data 1: Waterfall / Signal Contribution
+  // Chart Data: Waterfall
   const waterfallData = useMemo(() => {
     return [
       { name: "Prior Logit", value: simCalculation.prior.logit, fill: "var(--muted-foreground)" },
@@ -167,7 +195,7 @@ export default function MethodologyPage() {
     ]
   }, [simCalculation])
 
-  // Chart Data 2: Sigmoid Curve with dynamic point
+  // Chart Data: Sigmoid Curve
   const sigmoidCurveData = useMemo(() => {
     const pts = []
     for (let x = -5; x <= 6; x += 0.4) {
@@ -175,35 +203,19 @@ export default function MethodologyPage() {
       pts.push({
         x: Number(x.toFixed(1)),
         p: Math.round(p * 100),
-        active: Math.abs(x - simCalculation.logOdds) < 0.3,
       })
     }
     return pts
-  }, [simCalculation.logOdds])
+  }, [])
 
-  // Chart Data 3: Comparison of Conflated vs Decoupled
+  // Chart Data: Comparison
   const comparisonData = [
-    {
-      name: "Toshkent (Clean)",
-      prob: 10,
-      oldConf: 10, // Conflated with probability
-      newConf: 59, // Decoupled
-    },
-    {
-      name: "Andijon (Marginal 9/10)",
-      prob: 84,
-      oldConf: 84, // Conflated
-      newConf: 54, // Lower due to borderline decisiveness
-    },
-    {
-      name: "Termiz (Critical 10/10)",
-      prob: 99,
-      oldConf: 99, // Conflated
-      newConf: 89, // Decisive
-    },
+    { name: "Toshkent (Clean)", prob: 10, oldConf: 10, newConf: 59 },
+    { name: "Andijon (Marginal)", prob: 84, oldConf: 84, newConf: 54 },
+    { name: "Termiz (Critical)", prob: 99, oldConf: 99, newConf: 89 },
   ]
 
-  // Chart Data 4: Decisiveness Function 1 - e^-x
+  // Chart Data: Decisiveness Function
   const decisivenessCurveData = useMemo(() => {
     const pts = []
     for (let d = 0; d <= 4; d += 0.2) {
@@ -215,22 +227,14 @@ export default function MethodologyPage() {
     return pts
   }, [])
 
-  // Chart Data 5: Prior Logits Bar
-  const priorTierData = [
-    { tier: "Low", p: 4, logit: -3.178 },
-    { tier: "Moderate", p: 10, logit: -2.197 },
-    { tier: "Elevated", p: 20, logit: -1.386 },
-    { tier: "Critical", p: 33, logit: -0.708 },
-  ]
-
-  // Chart Data 6: 2D Decoupled Phase Plane
+  // Chart Data: 2D Phase Plane
   const phasePlanePoints = [
-    { name: "Clean Case", prob: 8, conf: 86, type: "clean" },
-    { name: "Slight Noise", prob: 18, conf: 65, type: "clean" },
-    { name: "Borderline Case", prob: 78, conf: 52, type: "marginal" },
-    { name: "Ambiguous Watch", prob: 50, conf: 38, type: "marginal" },
-    { name: "Flagged High", prob: 92, conf: 84, type: "critical" },
-    { name: "Critical Extremity", prob: 99, conf: 92, type: "critical" },
+    { name: "Clean Firm", prob: 8, conf: 86 },
+    { name: "Slight Noise", prob: 18, conf: 65 },
+    { name: "Borderline Case", prob: 78, conf: 52 },
+    { name: "Ambiguous Watch", prob: 50, conf: 38 },
+    { name: "Flagged High", prob: 92, conf: 84 },
+    { name: "Critical Extremity", prob: 99, conf: 92 },
   ]
 
   const loadPreset = (key) => {
@@ -241,8 +245,8 @@ export default function MethodologyPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8 max-w-5xl mx-auto pb-20 pt-2 font-sans">
-      {/* Article Header / Masthead */}
+    <div className="flex flex-col gap-8 max-w-5xl mx-auto pb-24 pt-2 font-sans">
+      {/* Header */}
       <div className="border-b pb-6 flex flex-col gap-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge variant="outline" className="font-mono text-xs gap-1.5 py-1">
@@ -250,7 +254,7 @@ export default function MethodologyPage() {
             Working Paper &bull; Technical Specification v3
           </Badge>
           <span className="font-mono text-xs text-muted-foreground">
-            Traced Line-by-Line to Running Engine
+            Complete Five-Layer Econometric Pipeline
           </span>
         </div>
 
@@ -259,13 +263,13 @@ export default function MethodologyPage() {
         </h1>
 
         <p className="text-base text-muted-foreground leading-relaxed italic max-w-4xl">
-          How the scorecard, the confidence metric, and the LLM narrative layer actually work — featuring 6 interactive econometric diagrams and a real-time live scorecard simulator.
+          How the scorecard, the confidence metric, and the LLM narrative layer actually work — traced line by line to the code that runs them across all five layers.
         </p>
 
         <div className="flex flex-wrap gap-4 pt-2 text-xs font-mono text-muted-foreground border-t">
           <span><strong>System:</strong> Shadow Index</span>
-          <span><strong>Scorecard:</strong> Live Deterministic</span>
-          <span><strong>Calibration:</strong> OECD Pre-Fit Defaults</span>
+          <span><strong>Layers:</strong> A &bull; B &bull; C &bull; D &bull; E</span>
+          <span><strong>Deterministic Math:</strong> Live In-Browser</span>
         </div>
       </div>
 
@@ -273,8 +277,37 @@ export default function MethodologyPage() {
       <div className="p-4 sm:p-5 rounded-lg border bg-muted/30 border-l-4 border-l-primary flex flex-col gap-2">
         <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary">Abstract</span>
         <p className="text-sm leading-relaxed text-foreground/90">
-          We describe a multi-tier system for flagging firm-level involvement in Uzbekistan&apos;s shadow economy: a deterministic <strong>weight-of-evidence (WoE) scorecard</strong> that converts seven firm-level forensic contradiction checks into a probability, a risk score, and a <strong>confidence</strong> figure computed independently of the probability&apos;s direction; and a downstream LLM layer that turns the scorecard&apos;s output into an audit narrative without touching the arithmetic.
+          We describe a five-part system for assessing firm-level involvement in Uzbekistan&apos;s shadow economy: <strong>Layer A</strong> (seven forensic contradiction checks), <strong>Layer B</strong> (a deterministic weight-of-evidence logistic scorecard), <strong>Layer C</strong> (a confidence metric decoupled from probability direction), <strong>Layer D</strong> (regional macro MIMIC context), and <strong>Layer E</strong> (a large-language-model narrative layer that synthesizes findings into an auditable report without touching arithmetic).
         </p>
+      </div>
+
+      {/* Overview of 5 Layers */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+        <div className="p-3 rounded-lg border bg-card flex flex-col gap-1">
+          <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer A</span>
+          <h4 className="text-xs font-bold">Forensic Signals</h4>
+          <span className="text-[11px] text-muted-foreground">7 contradiction tests</span>
+        </div>
+        <div className="p-3 rounded-lg border bg-card flex flex-col gap-1">
+          <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer B</span>
+          <h4 className="text-xs font-bold">WoE Scorecard</h4>
+          <span className="text-[11px] text-muted-foreground">Prior + &Sigma;w&middot;z &rarr; Score</span>
+        </div>
+        <div className="p-3 rounded-lg border bg-card flex flex-col gap-1">
+          <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer C</span>
+          <h4 className="text-xs font-bold">Decoupled Conf.</h4>
+          <span className="text-[11px] text-muted-foreground">Coverage &times; Decisiveness</span>
+        </div>
+        <div className="p-3 rounded-lg border bg-card flex flex-col gap-1">
+          <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer D</span>
+          <h4 className="text-xs font-bold">Regional MIMIC</h4>
+          <span className="text-[11px] text-muted-foreground">11 Causes + 6 Indicators</span>
+        </div>
+        <div className="p-3 rounded-lg border bg-card flex flex-col gap-1 col-span-2 sm:col-span-1">
+          <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer E</span>
+          <h4 className="text-xs font-bold">Gemini Synthesis</h4>
+          <span className="text-[11px] text-muted-foreground">Constrained JSON Report</span>
+        </div>
       </div>
 
       {/* SECTION 1: The Problem with One Number */}
@@ -332,98 +365,31 @@ export default function MethodologyPage() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <p className="text-xs text-muted-foreground mt-2 italic text-center">
-              {conflationComparisonMode === "conflated"
-                ? "Flaw: Clean firm (Toshkent) shows only 10% confidence, while unstable borderline 9/10 shows 84% confidence."
-                : "Fixed: Clean and Critical firms both earn ~60-90% high confidence because evidence is unambiguous; borderline firm drops to 54%."}
-            </p>
           </CardContent>
         </Card>
       </section>
 
-      {/* SECTION 2: System Architecture & Interactive Flow */}
+      {/* SECTION 2: Layer A — Forensic Contradiction Signals */}
       <section className="flex flex-col gap-4">
         <div className="flex items-baseline gap-2 border-b pb-2">
           <span className="font-mono font-bold text-lg text-primary">§2</span>
-          <h2 className="text-xl font-bold tracking-tight">System Architecture (Five-Layer Pipeline)</h2>
+          <h2 className="text-xl font-bold tracking-tight">Layer A &bull; Forensic Contradiction Signals (<code className="text-sm">forensics.js</code>)</h2>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Four layers execute deterministic mathematics; the fifth is a schema-constrained Google Gemini LLM synthesis strictly forbidden from altering numeric calculations.
+          Every signal in Layer A tests a firm&apos;s own filings against each other or against an independent record of the same transaction (e.g. counterparty e-invoices, POS settlement volumes, customs manifests, ASKUE power telemetry) — never against peer averages.
         </p>
 
-        {/* GRAPH 2: Interactive Clickable Pipeline Diagram */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          <div
-            onClick={() => setSelectedLayer("a")}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedLayer === "a" ? "border-primary bg-primary/10 shadow-sm" : "bg-card hover:bg-muted/50"}`}
-          >
-            <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer A</span>
-            <h4 className="text-xs font-bold mt-0.5">Forensics Rules</h4>
-            <span className="text-[11px] text-muted-foreground">7 consistency checks</span>
-          </div>
-
-          <div
-            onClick={() => setSelectedLayer("b")}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedLayer === "b" ? "border-primary bg-primary/10 shadow-sm" : "bg-card hover:bg-muted/50"}`}
-          >
-            <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer B & C</span>
-            <h4 className="text-xs font-bold mt-0.5">WoE Scorecard</h4>
-            <span className="text-[11px] text-muted-foreground">Logit + Decoupled Conf</span>
-          </div>
-
-          <div
-            onClick={() => setSelectedLayer("d")}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedLayer === "d" ? "border-primary bg-primary/10 shadow-sm" : "bg-card hover:bg-muted/50"}`}
-          >
-            <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer D</span>
-            <h4 className="text-xs font-bold mt-0.5">Regional MIMIC</h4>
-            <span className="text-[11px] text-muted-foreground">11 Causes + 6 Indicators</span>
-          </div>
-
-          <div
-            onClick={() => setSelectedLayer("e")}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedLayer === "e" ? "border-primary bg-primary/10 shadow-sm" : "bg-card hover:bg-muted/50"}`}
-          >
-            <span className="text-[10px] font-mono font-bold uppercase text-primary">Layer E</span>
-            <h4 className="text-xs font-bold mt-0.5">LLM Narrative</h4>
-            <span className="text-[11px] text-muted-foreground">Gemini JSON Synthesis</span>
-          </div>
-        </div>
-
-        <div className="p-4 rounded-md border bg-card text-xs leading-relaxed">
-          {selectedLayer === "a" && (
-            <p><strong>Layer A (forensics.js):</strong> Tests same-firm arithmetic facts across electronic VAT invoices, POS card turnover, payroll wage bunching, electricity telemetry, and customs declarations. Never compares against peer averages.</p>
-          )}
-          {selectedLayer === "b" && (
-            <p><strong>Layer B & C (shadow-score.js):</strong> Single pass over the 7 signals. Computes <code>logit(prior) + &Sigma; w&middot;z</code> for probability, and <code>coverage &times; decisiveness</code> for independent confidence.</p>
-          )}
-          {selectedLayer === "d" && (
-            <p><strong>Layer D (mimic_data.py):</strong> Regional macro context for Uzbekistan&apos;s 14 regions. Instructed by prompt never to treat macro variables alone as evidence against an individual firm.</p>
-          )}
-          {selectedLayer === "e" && (
-            <p><strong>Layer E (gemini.py):</strong> Constrained Gemini 2.5 Flash call producing narrative synthesis into PostgreSQL and client-side PDF export.</p>
-          )}
-        </div>
-      </section>
-
-      {/* SECTION 3 & 4: Scorecard Formulation & Table of 7 Signals */}
-      <section className="flex flex-col gap-4">
-        <div className="flex items-baseline gap-2 border-b pb-2">
-          <span className="font-mono font-bold text-lg text-primary">§3–4</span>
-          <h2 className="text-xl font-bold tracking-tight">Forensic Contradiction Signals & WoE Formulation</h2>
-        </div>
-
-        {/* Table 1: Exact Parameters */}
+        {/* Table of 7 Signals */}
         <div className="overflow-x-auto border rounded-lg">
           <table className="w-full text-xs">
             <thead className="bg-muted/50 border-b">
               <tr className="text-left font-mono text-muted-foreground">
-                <th className="p-2.5">Signal</th>
-                <th className="p-2.5">Tests</th>
+                <th className="p-2.5">Signal Rule</th>
+                <th className="p-2.5">Source &amp; Category</th>
                 <th className="p-2.5 font-bold">Threshold</th>
                 <th className="p-2.5">Scale</th>
-                <th className="p-2.5 font-bold">Weight (w)</th>
-                <th className="p-2.5">Gating</th>
+                <th className="p-2.5 font-bold">Weight</th>
+                <th className="p-2.5">Scope</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -448,12 +414,62 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      {/* SECTION 5: LIVE SCORECARD SIMULATOR */}
+      {/* SECTION 3: Layer B — Weight-of-Evidence Scorecard */}
+      <section className="flex flex-col gap-4">
+        <div className="flex items-baseline gap-2 border-b pb-2">
+          <span className="font-mono font-bold text-lg text-primary">§3</span>
+          <h2 className="text-xl font-bold tracking-tight">Layer B &bull; Weight-of-Evidence Scorecard (<code className="text-sm">shadow-score.js</code>)</h2>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          The scorecard model (Siddiqi 2012, OECD 2017) initializes from a peer-cohort prior logit based on the statutory baseline tier, adds excess contradiction $z$-scores multiplied by evidentiary weights, and passes the sum through a logistic link function.
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="p-4 rounded-md border bg-muted/20 font-mono text-xs flex flex-col gap-2">
+            <span className="font-bold text-foreground">// Mathematical Formulation</span>
+            <p>z_i = clip( max(0, raw_i &minus; threshold_i) / scale_i, 0, 3 )</p>
+            <p>contribution_i = weight_i &times; z_i</p>
+            <p>log_odds = logit(prior) + &Sigma; contribution_i</p>
+            <p>P = sigmoid(log_odds), clipped to [0.01, 0.99]</p>
+            <p>score = clip( round(1 + 9 &times; P), 1, 10 )</p>
+          </div>
+
+          <div className="p-4 rounded-md border bg-card flex flex-col justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Prior Logits by Baseline Risk Tier</span>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="p-2 border rounded text-xs"><span className="text-muted-foreground">Low:</span> <span className="font-mono font-bold">P=4% (logit &minus;3.178)</span></div>
+              <div className="p-2 border rounded text-xs"><span className="text-muted-foreground">Moderate:</span> <span className="font-mono font-bold">P=10% (logit &minus;2.197)</span></div>
+              <div className="p-2 border rounded text-xs"><span className="text-muted-foreground">Elevated:</span> <span className="font-mono font-bold">P=20% (logit &minus;1.386)</span></div>
+              <div className="p-2 border rounded text-xs border-destructive/30 bg-destructive/5"><span className="text-destructive font-semibold">Critical:</span> <span className="font-mono font-bold text-destructive">P=33% (logit &minus;0.708)</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: Layer C — Decoupled Confidence Metric */}
+      <section className="flex flex-col gap-4">
+        <div className="flex items-baseline gap-2 border-b pb-2">
+          <span className="font-mono font-bold text-lg text-primary">§4</span>
+          <h2 className="text-xl font-bold tracking-tight">Layer C &bull; Confidence, Decoupled from Direction</h2>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Confidence measures how much evidence exists and how decisively values sit away from statutory flag thresholds. It is built from two quantities: <strong>Coverage</strong> (fraction of applicable checks) and <strong>Decisiveness</strong> (1 &minus; exp(&minus;distance)).
+        </p>
+
+        <div className="p-4 rounded-md border bg-muted/20 font-mono text-xs flex flex-col gap-2">
+          <p>distance_i = | raw_i &minus; threshold_i | / scale_i</p>
+          <p>decisiveness_i = 1 &minus; exp(&minus;distance_i)</p>
+          <p>coverage = applicable_count / 7</p>
+          <p className="font-bold text-primary">confidence = clip( round( 100 &times; (0.30 &times; coverage + 0.70 &times; avg_decisiveness) ), 10, 96 )</p>
+        </div>
+      </section>
+
+      {/* SECTION 5: LIVE SIMULATOR */}
       <section className="flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-2">
           <div className="flex items-baseline gap-2">
             <span className="font-mono font-bold text-lg text-primary">§5</span>
-            <h2 className="text-xl font-bold tracking-tight">Interactive Live Scorecard Simulator</h2>
+            <h2 className="text-xl font-bold tracking-tight">Live Scorecard Simulator (Layers A, B &amp; C Running Live)</h2>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-muted-foreground mr-1">Presets:</span>
@@ -464,7 +480,7 @@ export default function MethodologyPage() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-12">
-          {/* Left Column: Sliders */}
+          {/* Sliders */}
           <div className="lg:col-span-7 flex flex-col gap-4 border p-4 rounded-lg bg-card">
             <div className="flex items-center justify-between border-b pb-2">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Layer A: Raw Signal Telemetry</span>
@@ -523,7 +539,7 @@ export default function MethodologyPage() {
             </div>
           </div>
 
-          {/* Right Column: Live Computation Outputs */}
+          {/* Live Outputs */}
           <div className="lg:col-span-5 flex flex-col gap-4 border p-4 rounded-lg bg-primary/5 border-primary/20">
             <span className="text-xs font-bold uppercase tracking-wider text-primary border-b pb-2">
               Live Layer B & C Calculation Output
@@ -574,21 +590,98 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      {/* SECTION 6: Econometric Graphs Grid (Waterfall + Sigmoid + Decisiveness + 2D Phase Plane) */}
-      <section className="flex flex-col gap-6">
+      {/* SECTION 6: Layer D — Regional Macro Context (MIMIC Dataset) */}
+      <section className="flex flex-col gap-4">
         <div className="flex items-baseline gap-2 border-b pb-2">
           <span className="font-mono font-bold text-lg text-primary">§6</span>
+          <h2 className="text-xl font-bold tracking-tight">Layer D &bull; Regional Macro Context (MIMIC Dataset &bull; <code className="text-sm">mimic_data.py</code>)</h2>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Independently of firm-level scoring, each of Uzbekistan&apos;s 14 regions carries a MIMIC-inspired macro dataset (Schneider &amp; Enste 2000): <strong>11 macro causes</strong> (fiscal burden, labor rigidity, corruption control) and <strong>6 observable indicators</strong> (currency demand ratio, electricity footprint, labor participation drops).
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Causes */}
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="size-4 text-amber-500" />
+                <CardTitle className="text-sm font-bold">11 Structural Macro Causes (X)</CardTitle>
+              </div>
+              <CardDescription className="text-xs">Forces incentivizing informal economic activity</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              {MIMIC_CAUSES.map((c, i) => (
+                <div key={i} className="p-2 rounded border bg-card text-xs flex flex-col gap-0.5">
+                  <div className="flex justify-between font-semibold">
+                    <span>{c.name}</span>
+                    <Badge variant="outline" className="text-[10px] font-mono">{c.effect === "+" ? "Increases (+)" : "Decreases (-)"}</Badge>
+                  </div>
+                  <span className="text-[11px] text-muted-foreground">{c.desc}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Indicators */}
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center gap-2">
+                <Layers className="size-4 text-blue-500" />
+                <CardTitle className="text-sm font-bold">6 Observable Traces (Y)</CardTitle>
+              </div>
+              <CardDescription className="text-xs">Physical and monetary footprints left by informal trade</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              {MIMIC_INDICATORS.map((ind, i) => (
+                <div key={i} className="p-2 rounded border bg-card text-xs flex flex-col gap-0.5">
+                  <div className="flex justify-between font-semibold">
+                    <span>{ind.name}</span>
+                    <Badge variant="secondary" className="text-[10px] font-mono">{ind.category}</Badge>
+                  </div>
+                  <span className="text-[11px] text-muted-foreground">{ind.desc}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* SECTION 7: Layer E — LLM Narrative Synthesis */}
+      <section className="flex flex-col gap-4">
+        <div className="flex items-baseline gap-2 border-b pb-2">
+          <span className="font-mono font-bold text-lg text-primary">§7</span>
+          <h2 className="text-xl font-bold tracking-tight">Layer E &bull; LLM Narrative Synthesis (<code className="text-sm">gemini.py</code>)</h2>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          A single <strong>Google Gemini 2.5 Flash</strong> call, constrained to a strict 8-field JSON schema, converts the scorecard&apos;s already-computed numbers plus Layer D&apos;s regional context into an auditable case narrative. It has <strong>no scoring authority</strong>: the score, probability, confidence, and per-signal metrics are computed deterministically in Layers A–C before the LLM runs.
+        </p>
+
+        <div className="p-4 rounded-md border bg-muted/20 font-mono text-xs flex flex-col gap-2">
+          <span className="font-bold text-foreground">// Strict JSON Schema Structure</span>
+          <p>&bull; <code>notes</code> (string): 2–4 sentence executive take</p>
+          <p>&bull; <code>executiveSummary</code> (string): High-level operational findings</p>
+          <p>&bull; <code>causesAnalysis</code> (string): Regional MIMIC macro causal factors</p>
+          <p>&bull; <code>indicatorsAnalysis</code> (string): Observable physical and monetary indicators</p>
+          <p>&bull; <code>conclusion</code> (string): Final synthesized assessment</p>
+          <p>&bull; <code>estimatedIndex</code> (integer 1–10) &bull; <code>confidencePercent</code> (integer 0–100)</p>
+          <p>&bull; <code>keyRiskFactors</code> (array of strings): 3–5 concise risk phrases</p>
+        </div>
+      </section>
+
+      {/* SECTION 8: Mathematical Visualizations Suite (4 Charts) */}
+      <section className="flex flex-col gap-6">
+        <div className="flex items-baseline gap-2 border-b pb-2">
+          <span className="font-mono font-bold text-lg text-primary">§8</span>
           <h2 className="text-xl font-bold tracking-tight">Mathematical Visualization Suite</h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {/* GRAPH 3: Waterfall Contribution */}
+          {/* GRAPH 2: Waterfall */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-bold">Graph 2 &bull; Log-Odds Evidentiary Waterfall</CardTitle>
-              <CardDescription className="text-xs">
-                Shows exact log-odds added by each signal to the prior logit
-              </CardDescription>
+              <CardDescription className="text-xs">Exact log-odds contribution added by each signal</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
@@ -612,13 +705,11 @@ export default function MethodologyPage() {
             </CardContent>
           </Card>
 
-          {/* GRAPH 4: Sigmoid Link Function with Operating Point */}
+          {/* GRAPH 3: Sigmoid Curve */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-bold">Graph 3 &bull; Sigmoid Link & Operating Point</CardTitle>
-              <CardDescription className="text-xs">
-                Live operating point (&eta; = {simCalculation.logOdds}) mapped to probability
-              </CardDescription>
+              <CardDescription className="text-xs">Operating point (&eta; = {simCalculation.logOdds}) mapped to probability</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
@@ -631,7 +722,7 @@ export default function MethodologyPage() {
                       contentStyle={{ backgroundColor: "var(--popover)", borderColor: "var(--border)", borderRadius: "8px" }}
                       formatter={(val) => [`${val}%`, "Probability (P)"]}
                     />
-                    <ReferenceLine x={simCalculation.logOdds} stroke="var(--destructive)" strokeDasharray="3 3" label={{ value: "Current", fontSize: 10, fill: "var(--destructive)" }} />
+                    <ReferenceLine x={simCalculation.logOdds} stroke="var(--destructive)" strokeDasharray="3 3" />
                     <Line type="monotone" dataKey="p" stroke="var(--primary)" strokeWidth={2.5} dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -639,20 +730,18 @@ export default function MethodologyPage() {
             </CardContent>
           </Card>
 
-          {/* GRAPH 5: Decisiveness Saturation Function */}
+          {/* GRAPH 4: Decisiveness */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-bold">Graph 4 &bull; Decisiveness Saturation Function</CardTitle>
-              <CardDescription className="text-xs">
-                Formula: d_i = 1 &minus; e^(&minus;distance) ensuring robust evidentiary saturation
-              </CardDescription>
+              <CardDescription className="text-xs">Formula: d_i = 1 &minus; exp(&minus;distance)</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={decisivenessCurveData} margin={{ top: 10, right: 20, left: -10, bottom: 10 }}>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                    <XAxis dataKey="distance" tick={{ fontSize: 10 }} label={{ value: "Standardized Distance (|raw-th|/scale)", position: "insideBottom", offset: -5, fontSize: 10 }} />
+                    <XAxis dataKey="distance" tick={{ fontSize: 10 }} label={{ value: "Standardized Distance", position: "insideBottom", offset: -5, fontSize: 10 }} />
                     <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} unit="%" />
                     <Tooltip
                       contentStyle={{ backgroundColor: "var(--popover)", borderColor: "var(--border)", borderRadius: "8px" }}
@@ -665,13 +754,11 @@ export default function MethodologyPage() {
             </CardContent>
           </Card>
 
-          {/* GRAPH 6: 2D Decoupled Phase Plane */}
+          {/* GRAPH 5: 2D Phase Plane */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-bold">Graph 5 &bull; 2D Phase Plane (Confidence vs. Probability)</CardTitle>
-              <CardDescription className="text-xs">
-                Proves orthogonal geometry: high confidence at both extremes
-              </CardDescription>
+              <CardDescription className="text-xs">Orthogonal geometry across sample risk cases</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
@@ -702,9 +789,9 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      {/* References & Citation */}
+      {/* References */}
       <div className="border-t pt-6 text-xs text-muted-foreground flex flex-col gap-2 font-mono">
-        <span className="font-bold text-foreground">References & Methodological Standards:</span>
+        <span className="font-bold text-foreground">References:</span>
         <p>1. Siddiqi, N. (2012). <em>Credit Risk Scorecards: Developing and Implementing Intelligent Credit Scoring</em>. Wiley.</p>
         <p>2. OECD (2017). <em>Compliance Risk Management: Developing Compliance Improvement Plans</em>. Forum on Tax Administration.</p>
         <p>3. Schneider, F. & Enste, D. (2000). <em>Shadow economies: size, causes, and consequences</em>. Journal of Economic Literature.</p>
