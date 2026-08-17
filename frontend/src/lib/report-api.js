@@ -1,7 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || "https://shadow-ai-sage.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL ?? "https://api-shadow.claive.uz"
 
 export async function generateReport({ business, region, aiResult }) {
-  const response = await fetch(`${API_URL}/api/report`, {
+  const endpoint = API_URL ? `${API_URL}/api/report` : `/api/report`
+  const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ business, region, aiResult }),

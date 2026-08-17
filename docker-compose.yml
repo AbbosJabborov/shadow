@@ -11,6 +11,11 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-radar} -d ${POSTGRES_DB:-radar}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - shadow_net
 
@@ -21,23 +26,27 @@ services:
     container_name: shadow_backend
     restart: unless-stopped
     command: >
-      sh -c "python manage.py migrate &&
-             python manage.py seed_mock_data --count 200 &&
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py seed_mock_data --count 5 &&
              gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
     environment:
-      - DEBUG=False
-      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-shadow-production-secret-key-replace-me}
-      - ALLOWED_HOSTS=api-shadow.claive.uz,shadow.claive.uz,localhost,127.0.0.1
+      - DEBUG=${DEBUG:-False}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-shadow-production-secret-key-change-me-2026}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-api-shadow.claive.uz,shadow.claive.uz,localhost,127.0.0.1,0.0.0.0}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://shadow.claive.uz,http://shadow.claive.uz,http://localhost:5173,http://127.0.0.1:5173}
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-https://shadow.claive.uz,https://api-shadow.claive.uz,http://shadow.claive.uz,http://api-shadow.claive.uz}
       - POSTGRES_DB=${POSTGRES_DB:-radar}
       - POSTGRES_USER=${POSTGRES_USER:-radar}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-radar_secret_pass_2026}
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - shadow_net
 
