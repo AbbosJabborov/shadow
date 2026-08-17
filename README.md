@@ -1,5 +1,5 @@
 # Shadow Index
-
+hello
 A regional shadow economy monitoring platform for Uzbekistan — built with React, Vite, Tailwind CSS, and [shadcn/ui](https://ui.shadcn.com).
 
 Tracks a composite shadow economy index across all 14 regions of Uzbekistan, with a registry of monitored MCHJ (LLC) businesses and an industry-level breakdown per region.
