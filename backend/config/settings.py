@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 load_dotenv(BASE_DIR.parent / '.env')
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'shadow-production-secret-key-change-me-2026')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'xq$fo)wx(m2nqz686gg%9*b*630xt6!9j)e0)0=')
 
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'yes')
 
