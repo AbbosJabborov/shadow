@@ -288,17 +288,17 @@ export default function LandingPage() {
                 Shadow Index
               </span>
               <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
-                MIMIC & LLM Intelligence
+                Scoring & LLM Intelligence
               </span>
             </div>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <a href="#about-mimic" className="transition-colors hover:text-foreground">
-              What is MIMIC?
+              How It Works
             </a>
             <a href="#causes-indicators" className="transition-colors hover:text-foreground">
-              Causes & Indicators
+              Regional Context
             </a>
             <a href="#llm-architecture" className="transition-colors hover:text-foreground">
               LLM Reasoning
@@ -593,7 +593,7 @@ export default function LandingPage() {
                   <BrainCircuit className="size-5 animate-pulse" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">
-                  MIMIC + Gemini Fusion
+                  Scorecard + Gemini Fusion
                 </h3>
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
