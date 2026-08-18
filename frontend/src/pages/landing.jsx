@@ -222,54 +222,39 @@ const MIMIC_INDICATORS = [
 // Team Members Dataset
 const TEAM_MEMBERS = [
   {
-    name: "AI & Pipeline Engineer",
-    role: "AI & LLM Pipeline Architecture",
-    tag: "CODER",
+    name: "Abbos Jabborov",
+    role: "Software Engineer",
+    subRole: "@Tonto Studio",
     avatarBg: "from-indigo-500/20 to-blue-500/20",
-    initials: "AI",
-    contribution:
-      "Engineered the Gemini 3.6 Flash latent reasoning pipeline, econometric prompt synthesis, and structured JSON output validators.",
-    skills: ["Gemini 3.6 Flash", "Python", "Prompt Engineering", "JSON Schemas"],
+    photoUrl: "/team/abbos.jpg",
   },
   {
-    name: "Full-Stack System Architect",
-    role: "Platform Architecture & Integration",
-    tag: "CODER",
+    name: "Akbar Evatov",
+    role: "AI/ML engineer",
+    subRole: "CS Student",
     avatarBg: "from-emerald-500/20 to-teal-500/20",
-    initials: "FS",
-    contribution:
-      "Designed the high-performance React 19 / Vite system, multi-region state management, and backend Express API gateway.",
-    skills: ["React 19", "Vite", "Node.js / Express", "Tailwind CSS v4"],
+    photoUrl: "/team/akbar.jpg",
   },
   {
-    name: "Frontend & PDF Engineer",
-    role: "Data Visualization & jsPDF Engine",
-    tag: "CODER",
+    name: "Asqar Arslonov",
+    role: "Full-Stack Engineer",
+    subRole: "Founder of leksika",
     avatarBg: "from-cyan-500/20 to-blue-500/20",
-    initials: "FE",
-    contribution:
-      "Implemented client-side jsPDF automated audit dossier generation, Recharts analytics, and dynamic interactive filters.",
-    skills: ["jsPDF", "Recharts", "Base UI", "Interactive State"],
+    photoUrl: "/team/asqar.jpg",
   },
   {
-    name: "Macroeconomic Researcher",
-    role: "MIMIC Modeling & Econometrics",
-    tag: "ECON RESEARCHER",
+    name: "Asliddin Boynazarov",
+    role: "Economics Researcher",
+    subRole: "Researcher @ Markaziy Bank",
     avatarBg: "from-amber-500/20 to-orange-500/20",
-    initials: "ER",
-    contribution:
-      "Formulated the Schneider MIMIC structural equations, 11 macroeconomic cause vectors, and regional calibration models for Uzbekistan.",
-    skills: ["Schneider MIMIC", "Econometric Modeling", "Structural Equations", "Fiscal Analysis"],
+    photoUrl: "/team/asliddin.jpg",
   },
   {
-    name: "Product & UI/UX Designer",
-    role: "Design Systems & Visual Strategy",
-    tag: "DESIGNER",
+    name: "Shoxrux Daminov",
+    role: "Designer & Marketing",
+    subRole: "American Corner lead volunteer",
     avatarBg: "from-purple-500/20 to-pink-500/20",
-    initials: "UX",
-    contribution:
-      "Created the monochromatic design tokens, severity ramp color scales, radar scanner interfaces, and responsive layouts.",
-    skills: ["Design Systems", "Figma", "Micro-Animations", "Information Hierarchy"],
+    photoUrl: "/team/shoxrux.jpg",
   },
 ]
 
@@ -687,64 +672,41 @@ export default function LandingPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {TEAM_MEMBERS.map((member, idx) => (
                 <Reveal
-                  key={member.role}
+                  key={member.name}
                   direction="up"
                   delay={idx * 60}
-                  className="rounded-2xl border border-border/80 bg-card p-5 shadow-sm flex flex-col justify-between hover:border-primary/50 transition-all group"
+                  className="rounded-2xl border border-border/80 bg-card shadow-sm flex flex-col hover:border-primary/50 transition-all group overflow-hidden"
                 >
-                  <div>
-                    {/* Template Avatar / Image */}
-                    <div
-                      className={`relative size-20 rounded-2xl bg-gradient-to-br ${member.avatarBg} border border-border flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform shadow-inner`}
-                    >
-                      <div className="text-xl font-heading font-black tracking-wider text-foreground">
-                        {member.initials}
+                  {/* Photo at the top */}
+                  <div
+                    className={`relative w-full aspect-square bg-gradient-to-br ${member.avatarBg} flex items-center justify-center overflow-hidden bg-muted`}
+                  >
+                    {member.photoUrl ? (
+                      <img
+                        src={member.photoUrl}
+                        alt={member.name}
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="text-xl font-heading font-black tracking-wider text-muted-foreground/40">
+                        {member.name.charAt(0)}
                       </div>
-                      <div className="absolute -bottom-2 -right-1">
-                        {member.tag === "CODER" && (
-                          <div className="size-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] shadow">
-                            <Code2 className="size-3" />
-                          </div>
-                        )}
-                        {member.tag === "ECON RESEARCHER" && (
-                          <div className="size-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] shadow">
-                            <Scale className="size-3" />
-                          </div>
-                        )}
-                        {member.tag === "DESIGNER" && (
-                          <div className="size-6 rounded-full bg-purple-500 text-white flex items-center justify-center text-[10px] shadow">
-                            <Palette className="size-3" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="text-center mb-3">
-                      <Badge variant="secondary" className="text-[10px] font-mono uppercase mb-1.5">
-                        {member.tag}
-                      </Badge>
-                      <h3 className="font-heading text-sm font-bold text-foreground">
-                        {member.name}
-                      </h3>
-                      <p className="text-[11px] text-muted-foreground font-medium">
-                        {member.role}
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-muted-foreground leading-relaxed text-center mb-4">
-                      {member.contribution}
-                    </p>
+                    )}
                   </div>
 
-                  <div className="pt-3 border-t border-border/40 flex flex-wrap gap-1 justify-center">
-                    {member.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded bg-secondary/80 px-1.5 py-0.5 text-[9px] font-mono text-muted-foreground"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  {/* Info below photo */}
+                  <div className="p-5 text-center flex flex-col items-center justify-center flex-grow">
+                    <h3 className="font-heading text-base font-bold text-foreground mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground font-medium">
+                      {member.role}
+                    </p>
+                    {member.subRole && (
+                      <p className="text-[11px] text-muted-foreground mt-1">
+                        {member.subRole}
+                      </p>
+                    )}
                   </div>
                 </Reveal>
               ))}
