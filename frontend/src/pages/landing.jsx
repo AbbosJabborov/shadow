@@ -328,9 +328,10 @@ export default function LandingPage() {
             <Reveal direction="up" className="flex flex-col items-center text-center gap-8">
               <div className="space-y-4 max-w-4xl flex flex-col items-center">
                 <h1 className="font-heading text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground max-w-3xl">
-                  Predicting Regional Shadow Economies with LLM model
+                  Predicting Regional Shadow Economies with{" "}
+                  <span className="text-sky-600 dark:text-sky-400">LLM model</span>
                 </h1>
-                <div className="relative rounded-2xl border border-white/10 bg-background/60 backdrop-blur-xl px-6 py-4 shadow-lg max-w-2xl mx-auto isolate">
+                <div className="relative rounded-2xl border border-white/10 bg-background/70 backdrop-blur-3xl px-6 py-4 shadow-lg max-w-2xl mx-auto isolate">
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                     A pioneering framework fusing the classical <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> latent variable model with <strong>Google Gemini reasoning</strong> to quantify, explain, and forecast unrecorded economic activity across all 14 administrative regions of Uzbekistan.
                   </p>
@@ -340,7 +341,7 @@ export default function LandingPage() {
               {/* Metric Summary Strip */}
               <div className="w-full max-w-sm sm:max-w-none grid grid-cols-3 gap-3 sm:gap-12 py-3 px-3 sm:px-12 border-y border-border/60 backdrop-blur-xs bg-background/40 rounded-xl">
                 <div>
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-amber-500">
                     {nationalIndex}%
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -348,7 +349,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="border-x border-border/60 px-4 sm:px-8">
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-emerald-500">
                     14 / 14
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -356,7 +357,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-sky-500">
                     11 / 6
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -369,7 +370,7 @@ export default function LandingPage() {
               <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                 <Link
                   to="/dashboard"
-                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 px-7 text-sm font-semibold text-white shadow-sm transition-all whitespace-nowrap shrink-0"
                 >
                   <LayoutDashboardIcon className="size-4 shrink-0" />
                   <span>Explore Dashboard</span>
@@ -391,7 +392,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Understanding the Schneider MIMIC Paradigm
+                Understanding the <span className="text-emerald-600 dark:text-emerald-400">Schneider MIMIC</span> Paradigm
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
                 Because shadow economic activities are deliberately concealed from national statistical agencies, they cannot be observed directly. The <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> approach, popularized by Prof. Friedrich Schneider, solves this unobservability problem through structural equation modeling.
@@ -400,9 +401,9 @@ export default function LandingPage() {
 
             {/* Explanatory 3-Pillar Cards */}
             <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-              <Reveal direction="up" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between">
+              <Reveal direction="up" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4">
+                  <div className="size-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
                     <Target className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
@@ -417,9 +418,9 @@ export default function LandingPage() {
                 </div>
               </Reveal>
 
-              <Reveal direction="up" delay={150} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between">
+              <Reveal direction="up" delay={150} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-amber-500/40 transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4">
+                  <div className="size-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4">
                     <Sliders className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
@@ -434,9 +435,9 @@ export default function LandingPage() {
                 </div>
               </Reveal>
 
-              <Reveal direction="up" delay={250} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between">
+              <Reveal direction="up" delay={250} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-sky-500/40 transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4">
+                  <div className="size-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4">
                     <Activity className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
@@ -558,7 +559,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Bridging Econometrics with Large Language Models
+                Bridging <span className="text-sky-600 dark:text-sky-400">Econometrics</span> with Large Language Models
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
                 Traditional econometric software computes cold numerical scores without explanatory power. By coupling the <strong>MIMIC dataset</strong> with <strong>Google Gemini</strong>, we transform raw statistics into deep qualitative diagnostics, risk rationales, and automated PDF audit dossiers.
@@ -646,6 +647,10 @@ export default function LandingPage() {
         <section id="team" className="py-20 border-b border-border/40 bg-secondary/15">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
+              <div className="flex items-center gap-2 justify-center mb-1">
+                <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider">Hackathon Team</span>
+              </div>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 The Minds Behind the Platform
               </h2>
@@ -717,7 +722,7 @@ export default function LandingPage() {
         <section className="py-20 bg-card relative overflow-hidden">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
             <Reveal direction="up">
-              <Badge variant="secondary" className="text-xs px-3 py-1">
+              <Badge variant="outline" className="text-xs px-3 py-1 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10">
                 Regional Economic Intelligence Platform
               </Badge>
               <h2 className="font-heading text-3xl font-black tracking-tight sm:text-5xl mt-3">
@@ -729,16 +734,16 @@ export default function LandingPage() {
               <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
                 <Link
                   to="/dashboard"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-sky-600 hover:bg-sky-700 px-8 text-sm font-semibold text-white shadow-sm transition-all whitespace-nowrap shrink-0"
                 >
                   <span>Enter Platform Dashboard</span>
                   <ArrowRight className="size-4 shrink-0" />
                 </Link>
                 <Link
                   to="/businesses"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-border bg-background px-8 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5 hover:bg-emerald-500/10 px-8 text-sm font-semibold text-foreground shadow-sm transition-all whitespace-nowrap shrink-0"
                 >
-                  <BrainCircuit className="size-4 shrink-0" />
+                  <BrainCircuit className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>Monitored Businesses</span>
                 </Link>
               </div>
