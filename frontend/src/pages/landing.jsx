@@ -227,6 +227,7 @@ const TEAM_MEMBERS = [
     subRole: "@Tonto Studio",
     avatarBg: "from-indigo-500/20 to-blue-500/20",
     photoUrl: "/team/abbos.jpg",
+    telegram: "https://t.me/claiveis",
   },
   {
     name: "Akbar Evatov",
@@ -234,6 +235,7 @@ const TEAM_MEMBERS = [
     subRole: "CS Student",
     avatarBg: "from-emerald-500/20 to-teal-500/20",
     photoUrl: "/team/akbar.jpg",
+    telegram: "https://t.me/Akbar_Evatov",
   },
   {
     name: "Asqar Arslonov",
@@ -241,6 +243,7 @@ const TEAM_MEMBERS = [
     subRole: "Founder of leksika",
     avatarBg: "from-cyan-500/20 to-blue-500/20",
     photoUrl: "/team/asqar.jpg",
+    telegram: "https://t.me/AsqarArslonov",
   },
   {
     name: "Asliddin Boynazarov",
@@ -248,6 +251,7 @@ const TEAM_MEMBERS = [
     subRole: "Researcher @ Markaziy Bank",
     avatarBg: "from-amber-500/20 to-orange-500/20",
     photoUrl: "/team/asliddin.jpg",
+    telegram: "https://t.me/asliddin_boynazarov_0204",
   },
   {
     name: "Shoxrux Daminov",
@@ -255,6 +259,7 @@ const TEAM_MEMBERS = [
     subRole: "American Corner lead volunteer",
     avatarBg: "from-purple-500/20 to-pink-500/20",
     photoUrl: "/team/shoxrux.jpg",
+    telegram: "https://t.me/Shoxrux_Daminov",
   },
 ]
 
@@ -325,7 +330,7 @@ export default function LandingPage() {
                 <h1 className="font-heading text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground max-w-3xl">
                   Predicting Regional Shadow Economies with LLM model
                 </h1>
-                <div className="rounded-2xl border border-white/10 bg-background/40 backdrop-blur-md px-6 py-4 shadow-lg max-w-2xl mx-auto">
+                <div className="relative rounded-2xl border border-white/10 bg-background/60 backdrop-blur-xl px-6 py-4 shadow-lg max-w-2xl mx-auto isolate">
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                     A pioneering framework fusing the classical <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> latent variable model with <strong>Google Gemini reasoning</strong> to quantify, explain, and forecast unrecorded economic activity across all 14 administrative regions of Uzbekistan.
                   </p>
@@ -676,17 +681,30 @@ export default function LandingPage() {
                   </div>
 
                   {/* Info below photo */}
-                  <div className="p-5 text-center flex flex-col items-center justify-center flex-grow">
-                    <h3 className="font-heading text-base font-bold text-foreground mb-1">
+                  <div className="p-4 text-center flex flex-col items-center justify-center flex-grow gap-1">
+                    <h3 className="font-heading text-sm font-bold text-foreground mb-0.5">
                       {member.name}
                     </h3>
                     <p className="text-xs text-muted-foreground font-medium">
                       {member.role}
                     </p>
                     {member.subRole && (
-                      <p className="text-[11px] text-muted-foreground mt-1">
+                      <p className="text-[10px] text-muted-foreground">
                         {member.subRole}
                       </p>
+                    )}
+                    {member.telegram && (
+                      <a
+                        href={member.telegram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 text-[10px] font-semibold text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 transition-colors"
+                      >
+                        <svg className="size-3" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                        </svg>
+                        Telegram
+                      </a>
                     )}
                   </div>
                 </Reveal>
