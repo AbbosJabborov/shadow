@@ -21,37 +21,6 @@ Tracks a composite shadow economy index across all 14 regions of Uzbekistan, wit
 
 ---
 
-## Production Deployment (VPS + Docker + NPM)
-
-### 1. Configure Environment
-Copy `.env.example` to `.env` on your VPS:
-```bash
-cp .env.example .env
-```
-Fill in your `POSTGRES_PASSWORD`, `DJANGO_SECRET_KEY`, and `GEMINI_API_KEY`.
-
-### 2. Start Services with Docker Compose
-```bash
-docker compose up -d --build
-```
-This boots:
-- **PostgreSQL 16** (`shadow_postgres`) on `5432` with persistent volume `pgdata`.
-- **Django Backend** (`shadow_backend`) on `http://127.0.0.1:8000` with Gunicorn.
-
-### 3. Nginx Proxy Manager (NPM) Configuration
-In your Nginx Proxy Manager dashboard:
-- **Domain Names**: `api-shadow.claive.uz`
-- **Forward Hostname / IP**: `127.0.0.1` (or your Docker host IP)
-- **Forward Port**: `8000`
-- **Block Common Exploits**: Enabled
-- **Websockets Support**: Enabled
-- **SSL**: Request Let's Encrypt Certificate, Force SSL enabled.
-
-For the frontend domain `shadow.claive.uz`:
-- Point to your frontend build or static host, configured with `VITE_API_URL=https://api-shadow.claive.uz`.
-
----
-
 ## API Endpoints
 
 | Method | Endpoint | Description |
