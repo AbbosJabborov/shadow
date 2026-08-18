@@ -328,59 +328,58 @@ export default function LandingPage() {
             <Reveal direction="up" className="flex flex-col items-center text-center gap-8">
               <div className="space-y-4 max-w-4xl flex flex-col items-center">
                 <h1 className="font-heading text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground max-w-3xl">
-                  Predicting Regional Shadow Economies with{" "}
-                  <span className="text-sky-600 dark:text-sky-400">LLM model</span>
+                  Mapping Regional Shadow Economies with{" "}
+                  <span className="text-foreground">LLM Reasoning</span>
                 </h1>
                 <div className="rounded-2xl border border-border bg-card px-6 py-4 shadow-sm max-w-2xl mx-auto">
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                    We built a platform that estimates how much economic activity in Uzbekistan goes unrecorded — then uses <strong>AI</strong> to explain why and what to do about it, for every region in the country.
+                    We score individual firms against seven forensic contradiction checks — wage patterns, invoice chains, customs records — then use <strong>AI</strong> to turn each score into a plain-language explanation, with regional context across all 14 regions of Uzbekistan.
                   </p>
                 </div>
               </div>
 
               {/* Metric Summary Strip */}
-              <div className="w-full max-w-sm sm:max-w-none grid grid-cols-3 gap-3 sm:gap-12 py-3 px-3 sm:px-12 border-y border-border/60 backdrop-blur-xs bg-background/40 rounded-xl">
+              <div className="w-full max-w-sm sm:max-w-none grid grid-cols-3 gap-3 sm:gap-12 py-3 px-3 sm:px-12 border-y border-border/60 bg-background/40 rounded-xl">
                 <div>
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-amber-500">
-                    {nationalIndex}%
-                  </div>
-                  <div className="text-xs text-muted-foreground font-medium">
-                    National Baseline Index
-                  </div>
-                </div>
-                <div className="border-x border-border/60 px-4 sm:px-8">
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-emerald-500">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
                     14 / 14
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
                     Regions Mapped
                   </div>
                 </div>
-                <div>
-                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-sky-500">
-                    11 / 6
+                <div className="border-x border-border/60 px-4 sm:px-8">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                    7 / 7
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
-                    Causes & Indicators
+                    Forensic Checks per Firm
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading text-muted-foreground">
+                    {nationalIndex}%
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Illustrative Regional Index
                   </div>
                 </div>
               </div>
 
-              {/* Hero CTAs */}
               <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                 <Link
                   to="/dashboard"
-                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 px-7 text-sm font-semibold text-white shadow-sm transition-all whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition-all hover:bg-foreground/90 whitespace-nowrap shrink-0"
                 >
                   <LayoutDashboardIcon className="size-4 shrink-0" />
                   <span>Explore Dashboard</span>
                 </Link>
                 <a
                   href="#about-mimic"
-                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg border border-border bg-background/80 backdrop-blur-xs px-7 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2.5 rounded-lg border border-border bg-background/80 px-7 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted whitespace-nowrap shrink-0"
                 >
                   <BookOpen className="size-4 shrink-0" />
-                  <span>MIMIC Model Deep-Dive</span>
+                  <span>How It Works</span>
                 </a>
               </div>
             </Reveal>
@@ -392,7 +391,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                How We Measure the <span className="text-emerald-600 dark:text-emerald-400">Shadow Economy</span>
+                How We Measure the Shadow Economy
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
                 You can't directly measure what people hide. So instead, we look at the clues they leave behind — things like excess cash in circulation or electricity usage that doesn't match reported output. The <strong>MIMIC model</strong> connects those clues to known causes like high taxes and weak institutions, giving us a reliable index.
@@ -559,7 +558,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Numbers Are Not Enough — We Add <span className="text-sky-600 dark:text-sky-400">AI Reasoning</span>
+                Numbers Are Not Enough — We Add AI Reasoning
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
                 A score alone doesn't tell you <em>why</em> a region has a high shadow index or what to do about it. By feeding our data into <strong>Google Gemini</strong>, we get plain-language explanations, risk breakdowns, and auto-generated audit reports — not just a number.
@@ -649,7 +648,7 @@ export default function LandingPage() {
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <div className="flex items-center gap-2 justify-center mb-1">
                 <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider">Hackathon Team</span>
+                <span className="text-xs font-mono text-muted-foreground font-semibold uppercase tracking-wider">Hackathon Team</span>
               </div>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 The Minds Behind the Platform
@@ -722,29 +721,29 @@ export default function LandingPage() {
         <section className="py-20 bg-card relative overflow-hidden">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
             <Reveal direction="up">
-              <Badge variant="outline" className="text-xs px-3 py-1 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10">
-                Regional Economic Intelligence Platform
+              <Badge variant="outline" className="text-xs px-3 py-1">
+                Firm-Level Risk Scoring Platform
               </Badge>
               <h2 className="font-heading text-3xl font-black tracking-tight sm:text-5xl mt-3">
                 Experience the Shadow Index Platform
               </h2>
               <p className="mx-auto max-w-2xl text-muted-foreground text-base sm:text-lg mt-2">
-                Analyze regional macroeconomic causes, review flagged businesses, and generate automated AI risk reports powered by Gemini and MIMIC econometrics.
+                Score registered firms against forensic checks, explore regional context, and generate plain-language AI risk reports — all in one place.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
                 <Link
                   to="/dashboard"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-sky-600 hover:bg-sky-700 px-8 text-sm font-semibold text-white shadow-sm transition-all whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-foreground hover:bg-foreground/90 px-8 text-sm font-semibold text-background shadow-sm transition-all whitespace-nowrap shrink-0"
                 >
                   <span>Enter Platform Dashboard</span>
                   <ArrowRight className="size-4 shrink-0" />
                 </Link>
                 <Link
                   to="/businesses"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5 hover:bg-emerald-500/10 px-8 text-sm font-semibold text-foreground shadow-sm transition-all whitespace-nowrap shrink-0"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-border bg-background hover:bg-muted px-8 text-sm font-semibold text-foreground shadow-sm transition-all whitespace-nowrap shrink-0"
                 >
-                  <BrainCircuit className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
-                  <span>Monitored Businesses</span>
+                  <BrainCircuit className="size-4 shrink-0" />
+                  <span>View Monitored Businesses</span>
                 </Link>
               </div>
             </Reveal>
