@@ -333,7 +333,7 @@ export default function LandingPage() {
                 </h1>
                 <div className="rounded-2xl border border-border bg-card px-6 py-4 shadow-sm max-w-2xl mx-auto">
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                    We score individual firms against seven forensic contradiction checks — wage patterns, invoice chains, customs records — then use <strong>AI</strong> to turn each score into a plain-language explanation, with regional context across all 14 regions of Uzbekistan.
+                    A platform that scores individual firms for shadow-economy risk using seven forensic checks, then uses AI to explain the reasoning — with regional context for every region in Uzbekistan.
                   </p>
                 </div>
               </div>
@@ -391,90 +391,85 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                How We Measure the Shadow Economy
+                How the Platform Works
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
-                You can't directly measure what people hide. So instead, we look at the clues they leave behind — things like excess cash in circulation or electricity usage that doesn't match reported output. The <strong>MIMIC model</strong> connects those clues to known causes like high taxes and weak institutions, giving us a reliable index.
+                The system runs every firm through a structured, multi-layer analysis. Each layer answers a different question — and no layer borrows its answer from the one before it. The result is a risk score, a confidence level, and a plain-language explanation that can be read by anyone.
               </p>
             </Reveal>
 
             {/* Explanatory 3-Pillar Cards */}
             <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-              <Reveal direction="up" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+              <Reveal direction="up" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-border transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
+                  <div className="size-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-foreground mb-4">
                     <Target className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    1. The Hidden Number
+                    1. Forensic Contradiction Checks
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Shadow GDP can't be surveyed directly — people won't admit it. So we treat it as a hidden score that we calculate indirectly from things we <em>can</em> measure.
+                    Each firm's own filings are tested against each other and against independently sourced records of the same events. A mismatch is a hard fact, not a statistical guess.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
-                  Unobserved True State
+                  7 checks per firm
                 </div>
               </Reveal>
 
-              <Reveal direction="up" delay={150} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-amber-500/40 transition-colors">
+              <Reveal direction="up" delay={150} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-border transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4">
+                  <div className="size-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-foreground mb-4">
                     <Sliders className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    2. What Drives It
+                    2. Risk Score + Confidence
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Things like high taxes, excessive red tape, low public trust, and weak job markets push people and businesses into the informal economy. We track 11 of these drivers per region.
+                    The contradiction signals feed into a proprietary scoring system that produces two separate numbers: how likely the firm is involved in shadow activity, and how decisive the evidence is — independently of each other.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
-                  11 Regional Cause Vectors
+                  Deterministic arithmetic
                 </div>
               </Reveal>
 
-              <Reveal direction="up" delay={250} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-sky-500/40 transition-colors">
+              <Reveal direction="up" delay={250} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between hover:border-border transition-colors">
                 <div>
-                  <div className="size-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4">
+                  <div className="size-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-foreground mb-4">
                     <Activity className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    3. The Clues Left Behind
+                    3. AI Narrative Report
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Informal activity leaves footprints — too much cash floating around, electricity consumption that doesn't match official output, workers who exist but don't appear in any payroll. We track 6 of these signals.
+                    AI reads the score and evidence — but has no authority to change any number. It writes a structured case narrative, citing only what the scorecards already established.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
-                  6 Empirical Footprints
+                  Plain-language output
                 </div>
               </Reveal>
             </div>
 
-            {/* Mathematical Formulation Showcase */}
             <Reveal direction="up" delay={200} className="mt-12 rounded-2xl border border-border/80 bg-card/80 p-6 md:p-8">
               <div className="grid gap-6 md:grid-cols-12 md:items-center">
                 <div className="md:col-span-8 space-y-2">
                   <div className="flex items-center gap-2">
                     <Scale className="size-4 text-primary" />
                     <span className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground">
-                      Structural & Measurement Equations
+                      Proprietary Scoring Design
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    The structural equation links the latent shadow economy η to cause vectors X: <br />
-                    <span className="font-mono font-semibold text-foreground">η = γ₁x₁ + γ₂x₂ + ... + γ₁₁x₁₁ + ζ</span>
-                    <br />
-                    The measurement equations link η to observable indicators Y: <br />
-                    <span className="font-mono font-semibold text-foreground">yⱼ = λⱼη + εⱼ  (for j = 1, ..., 6)</span>
+                    Each check is weighted by how directly it contradicts the firm's own filings. The scoring system starts from a sector and region baseline, then adjusts based on what the evidence actually says — not peer averages. Risk score and confidence are computed independently so that a firm can be clearly flagged with low confidence, or clearly clean with high confidence.
                   </p>
                 </div>
                 <div className="md:col-span-4 flex justify-start md:justify-end">
                   <div className="rounded-xl bg-secondary/50 border border-border p-4 text-xs font-mono text-muted-foreground space-y-1.5">
-                    <div>{"ζ ~ N(0, ψ)  [Structural Error]"}</div>
-                    <div>{"ε ~ N(0, Θ_ε)  [Measurement Error]"}</div>
-                    <div className="text-foreground font-semibold pt-1">Calibrated for Uzbekistan Regions</div>
+                    <div>Score → which way</div>
+                    <div>Confidence → how much</div>
+                    <div className="text-foreground font-semibold pt-1">Computed independently</div>
                   </div>
                 </div>
               </div>
@@ -487,10 +482,10 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-10">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                The 11 Structural Causes & 6 Trace Indicators
+                Regional Context Across All 14 Regions
               </h2>
               <p className="text-muted-foreground max-w-2xl text-sm sm:text-base">
-                Key macroeconomic vectors calibrated across regional registries (hover to pause).
+                Each region carries macroeconomic signals used as background context for AI narratives — not as direct inputs to firm scoring.
               </p>
             </Reveal>
           </div>
@@ -561,7 +556,7 @@ export default function LandingPage() {
                 Numbers Are Not Enough — We Add AI Reasoning
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
-                A score alone doesn't tell you <em>why</em> a region has a high shadow index or what to do about it. By feeding our data into <strong>Google Gemini</strong>, we get plain-language explanations, risk breakdowns, and auto-generated audit reports — not just a number.
+                The scorecard produces a number. AI turns it into a case. Crucially, the AI has no authority to change any figure — it reads the already-computed score, probability, and per-signal evidence, then writes a structured narrative explaining what the numbers mean.
               </p>
             </Reveal>
 
@@ -577,15 +572,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    Only works with straight-line math — misses complex patterns.
+                    Produces a single index number. No explanation of what drives it.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    Can't explain which sectors (farming, retail, etc.) are driving the result.
+                    No firm-level forensic checks — works only at aggregate level.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    Outputs a number. Nothing else.
+                    Can't tell you which specific firm or sector is driving the result.
                   </li>
                 </ul>
               </Reveal>
@@ -603,15 +598,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Understands complex, multi-factor patterns across all 14 regions.
+                    Runs firm-level forensic checks — same-document contradictions, not peer patterns.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Cross-references shadow trends with real registered businesses.
+                    Separates risk score from confidence — both computed independently.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Writes detailed audit reports automatically — ready to download.
+                    AI writes a plain-language narrative — without changing a single number.
                   </li>
                 </ul>
               </Reveal>
@@ -626,15 +621,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Flags which sectors are highest risk (e.g. construction, cash retail).
+                    Structured reports cite which specific checks were flagged and by how much.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Simulates what happens if a policy changes — before it's implemented.
+                    Regional context gives inspectors broader economic background for each case.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Built for tax inspection teams and economic reform tracking.
+                    Exportable PDF reports ready for inspection teams and reform tracking.
                   </li>
                 </ul>
               </Reveal>
