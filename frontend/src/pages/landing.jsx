@@ -331,9 +331,9 @@ export default function LandingPage() {
                   Predicting Regional Shadow Economies with{" "}
                   <span className="text-sky-600 dark:text-sky-400">LLM model</span>
                 </h1>
-                <div className="relative rounded-2xl border border-white/10 bg-background/70 backdrop-blur-3xl px-6 py-4 shadow-lg max-w-2xl mx-auto isolate">
+                <div className="rounded-2xl border border-border bg-card px-6 py-4 shadow-sm max-w-2xl mx-auto">
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                    A pioneering framework fusing the classical <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> latent variable model with <strong>Google Gemini reasoning</strong> to quantify, explain, and forecast unrecorded economic activity across all 14 administrative regions of Uzbekistan.
+                    We built a platform that estimates how much economic activity in Uzbekistan goes unrecorded — then uses <strong>AI</strong> to explain why and what to do about it, for every region in the country.
                   </p>
                 </div>
               </div>
@@ -392,10 +392,10 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Understanding the <span className="text-emerald-600 dark:text-emerald-400">Schneider MIMIC</span> Paradigm
+                How We Measure the <span className="text-emerald-600 dark:text-emerald-400">Shadow Economy</span>
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
-                Because shadow economic activities are deliberately concealed from national statistical agencies, they cannot be observed directly. The <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> approach, popularized by Prof. Friedrich Schneider, solves this unobservability problem through structural equation modeling.
+                You can't directly measure what people hide. So instead, we look at the clues they leave behind — things like excess cash in circulation or electricity usage that doesn't match reported output. The <strong>MIMIC model</strong> connects those clues to known causes like high taxes and weak institutions, giving us a reliable index.
               </p>
             </Reveal>
 
@@ -407,10 +407,10 @@ export default function LandingPage() {
                     <Target className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    1. The Latent Variable (η)
+                    1. The Hidden Number
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Rather than relying on inaccurate self-reporting surveys, the shadow economy is modeled as a continuous latent variable η that simultaneously influences and is influenced by multiple observable macroeconomic forces.
+                    Shadow GDP can't be surveyed directly — people won't admit it. So we treat it as a hidden score that we calculate indirectly from things we <em>can</em> measure.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
@@ -424,10 +424,10 @@ export default function LandingPage() {
                     <Sliders className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    2. Structural Causes (X)
+                    2. What Drives It
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Exogenous drivers that push workers and firms into informal operations — including high direct/indirect tax burdens, heavy social contributions, stringent labor market rigidity, and bureaucratic licensing bottlenecks.
+                    Things like high taxes, excessive red tape, low public trust, and weak job markets push people and businesses into the informal economy. We track 11 of these drivers per region.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
@@ -441,10 +441,10 @@ export default function LandingPage() {
                     <Activity className="size-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-2">
-                    3. Observable Traces (Y)
+                    3. The Clues Left Behind
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Empirical footprints left behind in the official economy — excessive physical cash demand (M0/M2 ratio), industrial electricity consumption discrepancies, and missing prime-age workers from official payrolls.
+                    Informal activity leaves footprints — too much cash floating around, electricity consumption that doesn't match official output, workers who exist but don't appear in any payroll. We track 6 of these signals.
                   </p>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border/40 text-xs font-mono text-muted-foreground">
@@ -559,10 +559,10 @@ export default function LandingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Bridging <span className="text-sky-600 dark:text-sky-400">Econometrics</span> with Large Language Models
+                Numbers Are Not Enough — We Add <span className="text-sky-600 dark:text-sky-400">AI Reasoning</span>
               </h2>
               <p className="text-muted-foreground max-w-3xl text-sm sm:text-base leading-relaxed">
-                Traditional econometric software computes cold numerical scores without explanatory power. By coupling the <strong>MIMIC dataset</strong> with <strong>Google Gemini</strong>, we transform raw statistics into deep qualitative diagnostics, risk rationales, and automated PDF audit dossiers.
+                A score alone doesn't tell you <em>why</em> a region has a high shadow index or what to do about it. By feeding our data into <strong>Google Gemini</strong>, we get plain-language explanations, risk breakdowns, and auto-generated audit reports — not just a number.
               </p>
             </Reveal>
 
@@ -578,15 +578,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    Strictly linear covariance assumptions.
+                    Only works with straight-line math — misses complex patterns.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    No qualitative sector breakdown (e.g. retail vs farming).
+                    Can't explain which sectors (farming, retail, etc.) are driving the result.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-destructive font-bold">✕</span>
-                    Produces abstract index numbers with zero narrative explanation.
+                    Outputs a number. Nothing else.
                   </li>
                 </ul>
               </Reveal>
@@ -604,15 +604,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Multi-causal non-linear reasoning across regional profiles.
+                    Understands complex, multi-factor patterns across all 14 regions.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Correlates regional shadow trends with monitored MCHJ companies.
+                    Cross-references shadow trends with real registered businesses.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Auto-generates structured executive audit reports and PDF briefs.
+                    Writes detailed audit reports automatically — ready to download.
                   </li>
                 </ul>
               </Reveal>
@@ -627,15 +627,15 @@ export default function LandingPage() {
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Identifies high-risk sectors (e.g. construction payroll).
+                    Flags which sectors are highest risk (e.g. construction, cash retail).
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Provides policy simulation: what if VAT compliance improves?
+                    Simulates what happens if a policy changes — before it's implemented.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">✓</span>
-                    Ready for tax inspection prioritization & reform monitoring.
+                    Built for tax inspection teams and economic reform tracking.
                   </li>
                 </ul>
               </Reveal>
