@@ -322,23 +322,20 @@ export default function LandingPage() {
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-8">
               <div className="space-y-4 max-w-4xl flex flex-col items-center">
-                <Badge variant="outline" className="gap-1.5 px-3.5 py-1 text-xs backdrop-blur-xs bg-background/60">
-                  <Sparkles className="size-3.5 text-primary" />
-                  Gemini 3.6 Flash & Schneider MIMIC
-                </Badge>
-
-                <h1 className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground max-w-3xl">
-                  Predicting Regional Shadow Economies with Generative AI
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground max-w-3xl">
+                  Predicting Regional Shadow Economies with LLM model
                 </h1>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                  A pioneering framework fusing the classical <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> latent variable model with <strong>Google Gemini reasoning</strong> to quantify, explain, and forecast unrecorded economic activity across all 14 administrative regions of Uzbekistan.
-                </p>
+                <div className="rounded-2xl border border-white/10 bg-background/40 backdrop-blur-md px-6 py-4 shadow-lg max-w-2xl mx-auto">
+                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                    A pioneering framework fusing the classical <strong>MIMIC (Multiple Indicators Multiple Causes)</strong> latent variable model with <strong>Google Gemini reasoning</strong> to quantify, explain, and forecast unrecorded economic activity across all 14 administrative regions of Uzbekistan.
+                  </p>
+                </div>
               </div>
 
               {/* Metric Summary Strip */}
-              <div className="grid grid-cols-3 gap-6 sm:gap-12 py-3 px-6 sm:px-12 border-y border-border/60 backdrop-blur-xs bg-background/40 rounded-xl">
+              <div className="w-full max-w-sm sm:max-w-none grid grid-cols-3 gap-3 sm:gap-12 py-3 px-3 sm:px-12 border-y border-border/60 backdrop-blur-xs bg-background/40 rounded-xl">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
                     {nationalIndex}%
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -346,7 +343,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="border-x border-border/60 px-4 sm:px-8">
-                  <div className="text-2xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
                     14 / 14
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -354,7 +351,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
+                  <div className="text-xl sm:text-3xl font-bold tracking-tight tabular-nums font-heading">
                     11 / 6
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -388,10 +385,6 @@ export default function LandingPage() {
         <section id="about-mimic" className="py-20 border-b border-border/40 bg-secondary/15">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
-              <Badge variant="outline" className="gap-1.5 px-3 py-1 text-xs">
-                <BookOpen className="size-3.5" />
-                Econometric Foundations
-              </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 Understanding the Schneider MIMIC Paradigm
               </h2>
@@ -401,7 +394,7 @@ export default function LandingPage() {
             </Reveal>
 
             {/* Explanatory 3-Pillar Cards */}
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
               <Reveal direction="up" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm flex flex-col justify-between">
                 <div>
                   <div className="size-10 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4">
@@ -488,10 +481,6 @@ export default function LandingPage() {
         <section id="causes-indicators" className="py-20 border-b border-border/40 overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-10">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3">
-              <Badge variant="outline" className="gap-1.5 px-3 py-1 text-xs">
-                <Layers className="size-3.5" />
-                Variable Catalog
-              </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 The 11 Structural Causes & 6 Trace Indicators
               </h2>
@@ -563,10 +552,6 @@ export default function LandingPage() {
         <section id="llm-architecture" className="py-20 border-b border-border/40 bg-secondary/15">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
-              <Badge variant="outline" className="gap-1.5 px-3 py-1 text-xs">
-                <BrainCircuit className="size-3.5" />
-                The Generative AI Breakthrough
-              </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 Bridging Econometrics with Large Language Models
               </h2>
@@ -576,7 +561,7 @@ export default function LandingPage() {
             </Reveal>
 
             {/* 3-Column Synergy Comparison */}
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
               <Reveal direction="left" delay={50} className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm">
                 <div className="size-10 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4">
                   <LineChart className="size-5" />
@@ -656,10 +641,6 @@ export default function LandingPage() {
         <section id="team" className="py-20 border-b border-border/40 bg-secondary/15">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal direction="up" className="flex flex-col items-center text-center gap-3 mb-16">
-              <Badge variant="outline" className="gap-1.5 px-3 py-1 text-xs">
-                <Users className="size-3.5" />
-                Hackathon Team
-              </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
                 The Minds Behind the Platform
               </h2>
@@ -669,7 +650,7 @@ export default function LandingPage() {
             </Reveal>
 
             {/* 5 Member Cards Grid */}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid gap-6 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {TEAM_MEMBERS.map((member, idx) => (
                 <Reveal
                   key={member.name}
